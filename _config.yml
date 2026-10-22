@@ -1,0 +1,8 @@
+# GitHub Pages: publish only the built site. Pages without front matter are
+# copied as is, so the built HTML is served byte for byte.
+exclude:
+  - src/
+  - scripts/
+  - README.md
+  - .tools/
+  - .gitignore
