@@ -16,6 +16,12 @@ Plain static HTML, no build step. Push to `main` and Pages republishes.
   the `/harbordesk/demo.html` landing page with selector `#demo-form`,
   insert mode "Replace children", and a form, then publish the slot.
 
+## Privacy
+
+`privacy.html` lists the Phave cookies and carries opt-out / allow buttons
+that call `window.__phv.consent(false | true)` (queued if the tag has not
+loaded yet). Every footer and the demo form link to it.
+
 ## Preview locally
 
 `python3 -m http.server 4330` and open http://localhost:4330/. The tag only
