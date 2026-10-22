@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = "/harbordesk"
-MAIN_PAGES = ["", "product/", "customers/", "pricing/", "resources/", "about/", "demo/", "brand/", "privacy/", "terms/"]
+MAIN_PAGES = ["", "product/", "customers/", "pricing/", "resources/", "about/", "demo/", "events/", "events/churn-risk-teardown-workshop/", "brand/", "privacy/", "terms/"]
 UK_SPELLINGS = r"\b(colour|colours|organisation|organise|prioritise|recognise|analyse|behaviour|favourite|centre|licence|catalogue)\b"
 AVOID = r"\b(unlock|seamless|revolutionary|game-changer|synergy|best-in-class|world-class|cutting-edge|start free trial)\b"
 
@@ -29,7 +29,7 @@ for page in pages:
         (r'<link rel="canonical" href="https://[^"]+">', "canonical"),
         (r'<meta property="og:title"', "og:title"),
         (r'<meta property="og:description"', "og:description"),
-        (r'<meta property="og:image" content="https://[^"]+og-image.png">', "og:image"),
+        (r'<meta property="og:image" content="https://[^"]+/og-[a-z]+\.png">', "og:image"),
         (r'<meta property="og:site_name" content="Harbor Desk">', "og:site_name"),
         (r'<img src="/harbordesk/assets/logo.svg" alt="Harbor Desk logo" class="logo"', "header logo img"),
         (r'<link rel="icon" href="[^"]+favicon.ico"', "favicon"),
@@ -37,6 +37,7 @@ for page in pages:
         (r"<header class=\"site-header\">", "header"),
         (r"<main id=\"main\">", "main"),
         (r"<footer class=\"site-footer\">", "footer"),
+        (r"<!-- PHAVE SITE TAG GOES HERE -->\s*<script async src=\"https://harbor-desk.phvtrack.dev/bambino.js\"", "site tag comment"),
     ]:
         if not re.search(pattern, html):
             problems.append(f"{rel}: missing {label}")
@@ -67,6 +68,35 @@ for page in pages:
         problems.append(f"{rel}: UK spelling {re.search(UK_SPELLINGS, visible, re.I).group(0)}")
     if rel.parts[0] != "brand" and re.search(AVOID, visible, re.I):
         problems.append(f"{rel}: avoided word {re.search(AVOID, visible, re.I).group(0)}")
+
+workshop = (ROOT / "events/churn-risk-teardown-workshop/index.html").read_text()
+for needle, label in [
+    ('<link rel="canonical" href="https://phavesoftware.github.io/harbordesk/events/churn-risk-teardown-workshop/">', "workshop canonical"),
+    ('og-workshop.png', "workshop og:image"),
+    ('<p class="tagline">Churn-risk teardown workshop</p>', "workshop eyebrow"),
+    ("<h1>See the accounts at risk while there is still time to talk</h1>", "workshop h1"),
+    ('<section id="reserve"', "reserve section"),
+    ("<!-- PHAVE FORM EMBED CODE GOES HERE -->", "form embed comment"),
+    ('<div id="workshop-registration-form"', "form embed target"),
+    ("Few seats left", "few seats badge"),
+    ("Harbor Desk helps your team act before renewal becomes a rescue.", "closing line"),
+]:
+    if needle not in workshop:
+        problems.append(f"workshop: missing {label}")
+if workshop.count('href="#reserve">Reserve a seat</a>') != 2:
+    problems.append("workshop: needs exactly two Reserve a seat buttons to #reserve")
+thanks = (ROOT / "events/churn-risk-teardown-workshop/thanks/index.html").read_text()
+if '<meta name="robots" content="noindex">' not in thanks:
+    problems.append("workshop thanks: missing noindex")
+sitemap = (ROOT / "sitemap.xml").read_text()
+for path in ["events/", "events/churn-risk-teardown-workshop/"]:
+    if f"{BASE}/{path}</loc>" not in sitemap:
+        problems.append(f"sitemap: missing {path}")
+if "/thanks/" in sitemap:
+    problems.append("sitemap: lists a thanks page")
+for name in ["index.html", "resources/index.html"]:
+    if f'href="{BASE}/events/churn-risk-teardown-workshop/"' not in (ROOT / name).read_text().split("<main", 1)[1].split("</main>")[0]:
+        problems.append(f"{name}: no workshop banner in main")
 
 css = (ROOT / "assets/site.css").read_text()
 outside_root = re.sub(r":root\s*\{.*?\}", "", css, count=1, flags=re.S)

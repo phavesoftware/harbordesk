@@ -5,7 +5,9 @@
 import { createRequire } from "node:module";
 import { writeFileSync, readFileSync, mkdirSync } from "node:fs";
 
-const require = createRequire(new URL("../.tools/package.json", import.meta.url));
+const require = createRequire(
+  new URL("../.tools/package.json", import.meta.url),
+);
 const opentype = require("opentype.js");
 const { Resvg } = require("@resvg/resvg-js");
 const pngToIcoModule = require("png-to-ico");
@@ -20,7 +22,9 @@ const LINE = "#d8e2e5";
 
 const FONTS = ".tools/fonts";
 const ttf = readFileSync(`${FONTS}/Manrope-800.ttf`);
-const manrope = opentype.parse(ttf.buffer.slice(ttf.byteOffset, ttf.byteOffset + ttf.byteLength));
+const manrope = opentype.parse(
+  ttf.buffer.slice(ttf.byteOffset, ttf.byteOffset + ttf.byteLength),
+);
 
 mkdirSync("assets", { recursive: true });
 
@@ -41,7 +45,10 @@ function markTile(tile, glyph) {
 
 function textPath(text, x, baseline, size, color) {
   const path = manrope.getPath(text, x, baseline, size);
-  return { svg: path.toSVG(2).replace("<path ", `<path fill="${color}" `), advance: manrope.getAdvanceWidth(text, size) };
+  return {
+    svg: path.toSVG(2).replace("<path ", `<path fill="${color}" `),
+    advance: manrope.getAdvanceWidth(text, size),
+  };
 }
 
 function wordmark(harborColor, deskColor) {
@@ -50,8 +57,17 @@ function wordmark(harborColor, deskColor) {
   const baseline = 71;
   const harbor = textPath("Harbor", x, baseline, size, harborColor);
   const gap = manrope.getAdvanceWidth(" ", size);
-  const desk = textPath("Desk", x + harbor.advance + gap, baseline, size, deskColor);
-  return { svg: harbor.svg + desk.svg, width: Math.ceil(x + harbor.advance + gap + desk.advance + 4) };
+  const desk = textPath(
+    "Desk",
+    x + harbor.advance + gap,
+    baseline,
+    size,
+    deskColor,
+  );
+  return {
+    svg: harbor.svg + desk.svg,
+    width: Math.ceil(x + harbor.advance + gap + desk.advance + 4),
+  };
 }
 
 function svgDoc(width, height, body, title) {
@@ -63,18 +79,33 @@ ${body}
 }
 
 function png(svg, width, path) {
-  const out = new Resvg(svg, { fitTo: { mode: "width", value: width }, font: { loadSystemFonts: false } }).render().asPng();
+  const out = new Resvg(svg, {
+    fitTo: { mode: "width", value: width },
+    font: { loadSystemFonts: false },
+  })
+    .render()
+    .asPng();
   writeFileSync(path, out);
   return out;
 }
 
 const color = wordmark(SECONDARY, PRIMARY);
-const logo = svgDoc(color.width, 100, markTile(PRIMARY, WHITE) + color.svg, "Harbor Desk logo");
+const logo = svgDoc(
+  color.width,
+  100,
+  markTile(PRIMARY, WHITE) + color.svg,
+  "Harbor Desk logo",
+);
 writeFileSync("assets/logo.svg", logo);
 png(logo, 600, "assets/logo.png");
 
 const white = wordmark(WHITE, WHITE);
-const logoWhite = svgDoc(white.width, 100, anchor(WHITE) + white.svg, "Harbor Desk logo (white)");
+const logoWhite = svgDoc(
+  white.width,
+  100,
+  anchor(WHITE) + white.svg,
+  "Harbor Desk logo (white)",
+);
 writeFileSync("assets/logo-white.svg", logoWhite);
 png(logoWhite, 600, "assets/logo-white.png");
 
@@ -82,26 +113,79 @@ const mark = svgDoc(100, 100, markTile(PRIMARY, WHITE), "Harbor Desk mark");
 writeFileSync("assets/logo-mark.svg", mark);
 png(mark, 512, "assets/logo-mark.png");
 
-const fullBleed = svgDoc(100, 100, `<rect width="100" height="100" fill="${PRIMARY}"/><g transform="translate(14 14) scale(0.72)">${anchor(WHITE)}</g>`, "Harbor Desk icon");
+const fullBleed = svgDoc(
+  100,
+  100,
+  `<rect width="100" height="100" fill="${PRIMARY}"/><g transform="translate(14 14) scale(0.72)">${anchor(WHITE)}</g>`,
+  "Harbor Desk icon",
+);
 png(fullBleed, 180, "apple-touch-icon.png");
-const icoSizes = [16, 32, 48].map((size) => png(mark, size, `.tools/favicon-${size}.png`));
+const icoSizes = [16, 32, 48].map((size) =>
+  png(mark, size, `.tools/favicon-${size}.png`),
+);
 writeFileSync("favicon.ico", await pngToIco(icoSizes));
 writeFileSync("favicon.svg", mark);
 
 const cardLogo = wordmark(WHITE, WHITE);
-const card = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+
+function socialCard(eyebrow, lines, subline, out) {
+  const eyebrowText = eyebrow
+    ? `<text x="96" y="300" font-family="Inter" font-weight="600" font-size="26" letter-spacing="3" fill="${ACCENT}">${eyebrow}</text>`
+    : "";
+  const top = eyebrow ? 372 : 400;
+  const headline = lines
+    .map(
+      ([text, fill], i) =>
+        `<text x="96" y="${top + i * 76}" font-family="Manrope" font-weight="800" font-size="60" fill="${fill}">${text}</text>`,
+    )
+    .join("\n  ");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <rect width="1200" height="630" fill="${INK}"/>
   <rect y="606" width="1200" height="24" fill="${PRIMARY}"/>
   <rect x="96" y="606" width="180" height="24" fill="${ACCENT}"/>
-  <g transform="translate(96 150) scale(1.6)">${markTile(PRIMARY, WHITE)}${cardLogo.svg}</g>
-  <text x="96" y="400" font-family="Manrope" font-weight="800" font-size="64" fill="${WHITE}">See churn coming.</text>
-  <text x="96" y="478" font-family="Manrope" font-weight="800" font-size="64" fill="${ACCENT}">Act before renewal.</text>
-  <text x="96" y="548" font-family="Inter" font-size="28" fill="${LINE}">The customer success platform for B2B SaaS teams.</text>
+  <g transform="translate(96 ${eyebrow ? 110 : 150}) scale(${eyebrow ? 1.2 : 1.6})">${markTile(PRIMARY, WHITE)}${cardLogo.svg}</g>
+  ${eyebrowText}
+  ${headline}
+  <text x="96" y="${top + lines.length * 76 - 6}" font-family="Inter" font-size="28" fill="${LINE}">${subline}</text>
 </svg>`;
-const cardPng = new Resvg(card, {
-  fitTo: { mode: "width", value: 1200 },
-  font: { loadSystemFonts: false, fontFiles: [`${FONTS}/Manrope-800.ttf`, `${FONTS}/Inter-400.ttf`], defaultFontFamily: "Inter" },
-}).render().asPng();
-writeFileSync("assets/og-image.png", cardPng);
+  const pngOut = new Resvg(svg, {
+    fitTo: { mode: "width", value: 1200 },
+    font: {
+      loadSystemFonts: false,
+      fontFiles: [`${FONTS}/Manrope-800.ttf`, `${FONTS}/Inter-400.ttf`, `${FONTS}/Inter-600.ttf`],
+      defaultFontFamily: "Inter",
+    },
+  })
+    .render()
+    .asPng();
+  writeFileSync(out, pngOut);
+}
 
-console.log("logo width", color.width, "white width", white.width, readFileSync("assets/logo.png").length, "bytes png");
+socialCard(
+  null,
+  [
+    ["See churn coming.", WHITE],
+    ["Act before renewal.", ACCENT],
+  ],
+  "The customer success platform for B2B SaaS teams.",
+  "assets/og-image.png",
+);
+socialCard(
+  "FREE LIVE WORKSHOP",
+  [
+    ["Churn-risk teardown workshop", WHITE],
+    ["See the accounts at risk while", ACCENT],
+    ["there is still time to talk.", ACCENT],
+  ],
+  "60 minutes on Zoom · 8 companies per session · Nov and Dec 2026",
+  "assets/og-workshop.png",
+);
+
+console.log(
+  "logo width",
+  color.width,
+  "white width",
+  white.width,
+  readFileSync("assets/logo.png").length,
+  "bytes png",
+);

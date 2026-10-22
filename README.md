@@ -49,6 +49,15 @@ Manrope 800 and Inter 400 TTFs in `.tools/fonts/`), then
   content slot with selector `#demo-form` and insert mode "Replace
   children" swaps in a Phave form. The plain form's fields carry no `name`,
   so submitting it sends nothing; it only navigates to `/demo/thanks/`.
+- Every `<head>` carries `<!-- PHAVE SITE TAG GOES HERE -->` with the tag
+  directly after it.
+- `/harbordesk/events/churn-risk-teardown-workshop/` has a `#reserve`
+  section with `<!-- PHAVE FORM EMBED CODE GOES HERE -->` and an empty
+  `#workshop-registration-form`: paste the Phave form embed there, or point
+  a content slot at that selector. Registrations should land on
+  `/harbordesk/events/churn-risk-teardown-workshop/thanks/` (noindex, not
+  in the nav or sitemap). The session dates live in `WORKSHOP_SESSIONS` in
+  `build.py` (structured data) and in the two event fragments (visible text).
 - `/harbordesk/privacy/` has opt-out and allow buttons that call
   `window.__phv.consent(false | true)` (queued if the tag has not loaded).
 

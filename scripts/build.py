@@ -26,6 +26,38 @@ TAG = (
 )
 
 
+WORKSHOP_SESSIONS = [
+    # (ISO start, ISO end) in Pacific Time; ET is three hours later.
+    ("2026-11-10T09:00:00-08:00", "2026-11-10T10:00:00-08:00"),
+    ("2026-11-18T11:00:00-08:00", "2026-11-18T12:00:00-08:00"),
+    ("2026-12-03T08:00:00-08:00", "2026-12-03T09:00:00-08:00"),
+]
+WORKSHOP_URL = f"{ORIGIN}{BASE}/events/churn-risk-teardown-workshop/"
+WORKSHOP_EVENTS = [
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "Churn-risk teardown workshop",
+        "description": "A 60-minute live working session for customer success leaders: how your team flags churn risk today, where accounts slip through before renewal, and which customer conversations should happen sooner.",
+        "startDate": start,
+        "endDate": end,
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {"@type": "VirtualLocation", "url": WORKSHOP_URL},
+        "image": f"{ORIGIN}{BASE}/assets/og-workshop.png",
+        "maximumAttendeeCapacity": 8,
+        "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "url": f"{WORKSHOP_URL}#reserve", "availability": "https://schema.org/LimitedAvailability"},
+        "organizer": {"@type": "Organization", "name": "Harbor Desk", "url": f"{ORIGIN}{BASE}/"},
+        "performer": [
+            {"@type": "Person", "name": "Priya Raman", "jobTitle": "VP of Customer Success"},
+            {"@type": "Person", "name": "Maya Okafor", "jobTitle": "Co-founder and Chief Executive Officer"},
+        ],
+    }
+    for start, end in WORKSHOP_SESSIONS
+]
+
+
 @dataclass
 class Page:
     path: str  # "" for home, else "pricing/" etc.
@@ -35,6 +67,9 @@ class Page:
     nav: str | None = None  # header nav key this page highlights
     kind: str = "website"
     index: bool = True
+    og_image: str = "assets/og-image.png"
+    og_alt: str = "Harbor Desk logo with the line: See churn coming. Act before renewal."
+    json_ld: dict | list | None = None  # page-specific structured data
 
 
 PAGES = [
@@ -62,8 +97,21 @@ PAGES = [
          "Book a 30-minute Harbor Desk demo with a customer success specialist. See Health Scores, Playbooks and the EBR Builder on accounts like yours.", "demo"),
     Page("demo/thanks/", "demo-thanks.html", "Thanks, we'll be in touch · Harbor Desk",
          "Thanks for booking a Harbor Desk demo. A customer success specialist will email you within one business day.", "demo", index=False),
+    Page("events/", "events.html", "Events: live workshops for customer success leaders · Harbor Desk",
+         "Free live workshops from Harbor Desk for VPs of Customer Success, CS Operations and Chief Customer Officers, including the Churn-risk teardown workshop.", "events"),
+    Page("events/churn-risk-teardown-workshop/", "event-churn-risk-teardown.html",
+         "Churn-risk teardown workshop: a free 60-minute working session · Harbor Desk",
+         "A free 60-minute live session on Zoom for CS leaders. Work through how your team spots churn risk, where accounts slip before renewal, and which conversations to have sooner. 8 companies per session.",
+         "events", og_image="assets/og-workshop.png",
+         og_alt="Harbor Desk logo with the title: Churn-risk teardown workshop. See the accounts at risk while there is still time to talk.",
+         json_ld=WORKSHOP_EVENTS),
+    Page("events/churn-risk-teardown-workshop/thanks/", "event-churn-risk-teardown-thanks.html",
+         "Thanks, you're registered: Churn-risk teardown workshop · Harbor Desk",
+         "You're registered for the Harbor Desk Churn-risk teardown workshop. Look out for a calendar invite and a short pre-work email.",
+         "events", og_image="assets/og-workshop.png",
+         og_alt="Harbor Desk logo with the title: Churn-risk teardown workshop.", index=False),
     Page("brand/", "brand.html", "Brand and press kit · Harbor Desk",
-         "Harbor Desk logo files, colour palette with hex values, fonts, and the rules for how we write: tone, words we avoid and product name capitalization.", None),
+         "Harbor Desk logo files, color palette with hex values, fonts, and the rules for how we write: tone, words we avoid and product name capitalization.", None),
     Page("privacy/", "privacy.html", "Privacy policy · Harbor Desk",
          "How Harbor Desk collects, uses and protects information about visitors to this website, the cookies it sets, and how to opt out.", None),
     Page("terms/", "terms.html", "Terms of use · Harbor Desk",
@@ -75,6 +123,7 @@ HEADER_NAV = [
     ("customers", "customers/", "Customers"),
     ("pricing", "pricing/", "Pricing"),
     ("resources", "resources/", "Resources"),
+    ("events", "events/", "Events"),
     ("about", "about/", "About"),
 ]
 
@@ -122,7 +171,7 @@ def footer() -> str:
         <address>Harbor Desk, Inc.<br>220 Wharf Street<br>Portland, ME 04101<br>United States</address>
       </div>
 {col("Product", [("product/", "Product overview"), ("product/#health-scores", "Health Scores"), ("product/#playbooks", "Playbooks"), ("product/#ebr-builder", "EBR Builder"), ("pricing/", "Pricing")])}
-{col("Company", [("about/", "About"), ("customers/", "Customers"), ("resources/", "Resources"), ("brand/", "Brand and press"), ("", "Home")])}
+{col("Company", [("about/", "About"), ("customers/", "Customers"), ("resources/", "Resources"), ("events/", "Events"), ("events/churn-risk-teardown-workshop/", "Churn-risk teardown workshop"), ("brand/", "Brand and press"), ("", "Home")])}
 {col("Get started", [("demo/", "Book a demo"), ("demo/#talk-to-sales", "Talk to sales"), ("privacy/", "Privacy policy"), ("terms/", "Terms of use")])}
     </div>
     <div class="footer-base">
@@ -157,7 +206,12 @@ ORGANIZATION = {
 
 def head(page: Page) -> str:
     canonical = f"{ORIGIN}{url(page.path)}"
-    og_image = f"{ORIGIN}{url('assets/og-image.png')}"
+    og_image = f"{ORIGIN}{url(page.og_image)}"
+    og_alt = escape(page.og_alt)
+    page_ld = (
+        f'\n  <script type="application/ld+json">{json.dumps(page.json_ld)}</script>'
+        if page.json_ld else ""
+    )
     title = escape(page.title)
     desc = escape(page.description)
     robots = "" if page.index else '\n  <meta name="robots" content="noindex">'
@@ -175,7 +229,7 @@ def head(page: Page) -> str:
   <meta property="og:image" content="{og_image}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Harbor Desk logo with the line: See churn coming. Act before renewal.">
+  <meta property="og:image:alt" content="{og_alt}">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="{url("favicon.ico")}" sizes="any">
   <link rel="icon" href="{url("favicon.svg")}" type="image/svg+xml">
@@ -184,7 +238,8 @@ def head(page: Page) -> str:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap">
   <link rel="stylesheet" href="{url("assets/site.css")}">
-  <script type="application/ld+json">{json.dumps(ORGANIZATION)}</script>
+  <script type="application/ld+json">{json.dumps(ORGANIZATION)}</script>{page_ld}
+  <!-- PHAVE SITE TAG GOES HERE -->
   {TAG}
 </head>"""
 
