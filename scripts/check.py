@@ -44,8 +44,10 @@ for page in pages:
 
     if len(re.findall(r"<h1[\s>]", html)) != 1:
         problems.append(f"{rel}: needs exactly one <h1>")
-    if html.count("bambino.js") != 1:
-        problems.append(f"{rel}: Phave tag must appear exactly once")
+    # The form embed carries its own copy of the tag beside the form.
+    expected_tags = 2 if 'data-phave-form="' in html else 1
+    if html.count("bambino.js") != expected_tags:
+        problems.append(f"{rel}: Phave tag must appear {expected_tags} time(s)")
 
     title = re.search(r"<title>([^<]+)</title>", html)
     if title:
@@ -78,6 +80,7 @@ for needle, label in [
     ('<section id="reserve"', "reserve section"),
     ("<!-- PHAVE FORM EMBED CODE GOES HERE -->", "form embed comment"),
     ('<div id="workshop-registration-form"', "form embed target"),
+    ('<div data-phave-form="f0hohdpb03g6u9l"></div>', "Phave form element"),
     ("Few seats left", "few seats badge"),
     ("Harbor Desk helps your team act before renewal becomes a rescue.", "closing line"),
 ]:
