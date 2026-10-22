@@ -9,8 +9,9 @@ Plain static HTML, no build step. Push to `main` and Pages republishes.
 
 - Subscription: **Harbor Desk** on staging (`stage.phave.dev`).
 - Site: **Harbor Desk website**, Self-hosted, host `phavesoftware.github.io`.
-- The site tag loads on every page from `assets/phave-tag.js`. Paste the
-  write key from Settings → Web → Write keys into that file.
+- The site tag sits at the end of `<head>` on every page, written directly
+  in the HTML. Its attributes identify the account: copy it exactly, and
+  replace it on every page if the key is rotated (Settings → Web → Write keys).
 - `demo.html` has an empty `#demo-form` container. Add a content slot on
   the `/harbordesk/demo.html` landing page with selector `#demo-form`,
   insert mode "Replace children", and a form, then publish the slot.
