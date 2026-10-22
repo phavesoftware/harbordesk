@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product: Health Scores, Playbooks and EBR Builder · Harbor Desk</title>
+  <meta name="description" content="How Harbor Desk Health Scores, Playbooks and the EBR Builder work, who uses each one, and a concrete example of each.">
+  <link rel="canonical" href="https://phavesoftware.github.io/harbordesk/product/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Harbor Desk">
+  <meta property="og:title" content="Product: Health Scores, Playbooks and EBR Builder · Harbor Desk">
+  <meta property="og:description" content="How Harbor Desk Health Scores, Playbooks and the EBR Builder work, who uses each one, and a concrete example of each.">
+  <meta property="og:url" content="https://phavesoftware.github.io/harbordesk/product/">
+  <meta property="og:image" content="https://phavesoftware.github.io/harbordesk/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Harbor Desk logo with the line: See churn coming. Act before renewal.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/harbordesk/favicon.ico" sizes="any">
+  <link rel="icon" href="/harbordesk/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/harbordesk/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap">
+  <link rel="stylesheet" href="/harbordesk/assets/site.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Harbor Desk", "legalName": "Harbor Desk, Inc.", "url": "https://phavesoftware.github.io/harbordesk/", "logo": "https://phavesoftware.github.io/harbordesk/assets/logo.png", "slogan": "See churn coming. Act before renewal.", "description": "Harbor Desk is a customer success platform for B2B SaaS companies with 50 to 2,000 employees: health scores, playbooks and executive business reviews built from usage data.", "foundingDate": "2019", "numberOfEmployees": {"@type": "QuantitativeValue", "value": 140}, "address": {"@type": "PostalAddress", "streetAddress": "220 Wharf Street", "addressLocality": "Portland", "addressRegion": "ME", "postalCode": "04101", "addressCountry": "US"}}</script>
+  <script async src="https://harbor-desk.phvtrack.dev/bambino.js" data-phv-tenant="harbor-desk" data-phv-key="phv_wk_PFesdDymtxDz-Sfh6mE4epN-Ikw8pBww" data-phv-consent="opt_out"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/harbordesk/" class="logo-link"><img src="/harbordesk/assets/logo.svg" alt="Harbor Desk logo" class="logo" width="172" height="36"></a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li><a href="/harbordesk/product/" aria-current="page">Product</a></li>
+        <li><a href="/harbordesk/customers/">Customers</a></li>
+        <li><a href="/harbordesk/pricing/">Pricing</a></li>
+        <li><a href="/harbordesk/resources/">Resources</a></li>
+        <li><a href="/harbordesk/about/">About</a></li>
+        <li><a class="btn btn-primary" href="/harbordesk/demo/">Book a demo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Product</p>
+    <h1>Health Scores, Playbooks and the EBR Builder.</h1>
+    <p>Harbor Desk does three jobs for a customer success team: show which accounts are drifting, act on it before the renewal, and prove value to the executive sponsor. Here is how each part works, who uses it, and what it looks like on a real account.</p>
+  </div>
+</section>
+
+<section class="section" id="health-scores">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">01 · Health Scores</p>
+      <h2>A score your CSMs can explain in one sentence.</h2>
+      <p>Every account gets a health score from 0 to 100, recalculated every night. The score is built from the signals that predict churn in your business, weighted the way your team agrees they matter: weekly active users against seats sold, adoption of the features tied to the customer's goals, open and escalated support tickets, changes to the executive sponsor, NPS responses and overdue invoices.</p>
+      <p>Each score shows its working. Open an account and you see which signals moved it, by how much, and since when. A score that can't explain itself doesn't get used, so we don't ship one.</p>
+      <p><strong>Who uses it:</strong> CSMs check it every morning to plan their day. CS Operations owns the model and tunes the weights. CS leaders use the portfolio view to see risk by segment, region and renewal quarter.</p>
+    </div>
+    <div>
+      <div class="example">
+        <p><strong>Example.</strong> An 800-seat account renewing in 120 days drops from 82 to 61 over three weeks. The account page shows why: weekly active users fell from 610 to 430 after a reorganization, and two escalated tickets about the reporting module are still open. The CSM knows what to talk about before opening the email.</p>
+      </div>
+      <ul class="checklist">
+        <li>Scores from 0 to 100, with green, amber and red bands you set</li>
+        <li>Separate models per segment (for example SMB and enterprise)</li>
+        <li>Every signal and weight visible on the account page</li>
+        <li>Score history, so you can see a trend and not just a number</li>
+        <li>Back-testing against your last eight quarters of renewals</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="playbooks">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">02 · Playbooks</p>
+      <h2>When health changes, something happens.</h2>
+      <p>A playbook is a rule plus a set of actions. When an account crosses a threshold or a specific signal fires, the playbook runs: it creates tasks for the right people, drafts emails for the CSM to review, posts to a Slack channel, updates a field in Salesforce or HubSpot, and adds the account to a review queue.</p>
+      <p>Playbooks are written by CS Operations in plain conditions, not code. Each one shows how often it fired last quarter and what happened to the accounts it touched, so you can retire the ones that create work without changing outcomes.</p>
+      <p><strong>Who uses it:</strong> CS Operations builds and maintains playbooks. CSMs work the tasks they create. CS leaders see which playbooks are moving retention and which are noise.</p>
+    </div>
+    <div>
+      <div class="example">
+        <p><strong>Example.</strong> The "Sponsor change" playbook fires when the executive sponsor's email address bounces or their title changes in the CRM. Within an hour the CSM has a task to find the new sponsor, a drafted introduction email, and the account is on Monday's risk review. Tidewater Freight runs this playbook on 1,400 accounts.</p>
+      </div>
+      <ul class="checklist">
+        <li>Triggers on score bands, score drops, single signals or dates</li>
+        <li>Actions: tasks, email drafts, Slack posts, CRM field updates</li>
+        <li>Human review on any customer-facing email, always</li>
+        <li>Quiet hours and per-account limits, so nobody gets five emails in a week</li>
+        <li>Outcome reporting per playbook</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ebr-builder">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">03 · EBR Builder</p>
+      <h2>EBR decks built from data, not from Sunday nights.</h2>
+      <p>The EBR Builder assembles an executive business review deck from the data Harbor Desk already has: adoption over the last two quarters, progress against the goals the customer set at kickoff, support volume and resolution times, and the value delivered in the customer's own terms. It adds a recommended next step based on the account's health and contract.</p>
+      <p>Your CSM edits the narrative, removes what doesn't matter to this executive, and exports to Google Slides, PowerPoint or PDF in your company's template. The numbers are always current, and they are always the same numbers the rest of the company sees.</p>
+      <p><strong>Who uses it:</strong> CSMs and account managers build decks before quarterly reviews. CS leaders use the same data for board reporting on retention.</p>
+    </div>
+    <div>
+      <div class="example">
+        <p><strong>Example.</strong> Before a quarterly review with a 300-seat customer, the CSM opens the EBR Builder. The draft deck shows adoption up from 54% to 71% of seats, two of three kickoff goals met, and a recommendation to expand into the finance team. The CSM rewrites one slide and sends it. Lighthouse Payroll cut EBR prep from 6 hours to 40 minutes this way.</p>
+      </div>
+      <ul class="checklist">
+        <li>Decks in your brand template, exported to Slides, PowerPoint or PDF</li>
+        <li>Goals captured at kickoff and tracked automatically</li>
+        <li>A recommended next step on every deck</li>
+        <li>Version history, so you can compare this quarter with last</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>Integrations</h2>
+    <p class="lede">Harbor Desk reads from the systems you already use and writes back where your team works. Salesforce, HubSpot, Zendesk, Intercom, Segment, Snowflake, BigQuery and Slack are included on every plan. Your CRM stays the system of record.</p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>See churn coming. Act before renewal.</h2>
+    <p>We'll show you all three on accounts that look like yours.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/harbordesk/demo/">Book a demo</a>
+      <a class="btn btn-on-dark" href="/harbordesk/demo/#talk-to-sales">Talk to sales</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="/harbordesk/assets/logo-white.svg" alt="Harbor Desk logo" class="footer-logo" width="143" height="30">
+        <p>See churn coming. Act before renewal.</p>
+        <address>Harbor Desk, Inc.<br>220 Wharf Street<br>Portland, ME 04101<br>United States</address>
+      </div>
+      <nav aria-label="Product">
+        <h2>Product</h2>
+        <ul>
+          <li><a href="/harbordesk/product/">Product overview</a></li>
+          <li><a href="/harbordesk/product/#health-scores">Health Scores</a></li>
+          <li><a href="/harbordesk/product/#playbooks">Playbooks</a></li>
+          <li><a href="/harbordesk/product/#ebr-builder">EBR Builder</a></li>
+          <li><a href="/harbordesk/pricing/">Pricing</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Company">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/harbordesk/about/">About</a></li>
+          <li><a href="/harbordesk/customers/">Customers</a></li>
+          <li><a href="/harbordesk/resources/">Resources</a></li>
+          <li><a href="/harbordesk/brand/">Brand and press</a></li>
+          <li><a href="/harbordesk/">Home</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Get started">
+        <h2>Get started</h2>
+        <ul>
+          <li><a href="/harbordesk/demo/">Book a demo</a></li>
+          <li><a href="/harbordesk/demo/#talk-to-sales">Talk to sales</a></li>
+          <li><a href="/harbordesk/privacy/">Privacy policy</a></li>
+          <li><a href="/harbordesk/terms/">Terms of use</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-base">
+      <span>&copy; 2026 Harbor Desk, Inc. All rights reserved.</span>
+      <span>Harbor Desk is a fictional company used for product demos.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
