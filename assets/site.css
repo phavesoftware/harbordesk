@@ -50,6 +50,24 @@ p { margin: 0 0 16px; }
 .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px 22px; align-items: center; flex-wrap: wrap; }
 .nav a { color: var(--color-ink); text-decoration: none; font-weight: 600; font-size: 15px; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--color-primary); }
+.nav { margin-left: auto; }
+
+/* Language picker */
+.lang-picker { position: relative; }
+.lang-picker summary { list-style: none; display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--color-line); font-weight: 700; font-size: 14px; color: var(--color-ink); cursor: pointer; }
+.lang-picker summary::-webkit-details-marker { display: none; }
+.lang-picker summary::after { content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translate(-2px, -2px); }
+.lang-picker[open] summary, .lang-picker summary:hover { box-shadow: inset 0 0 0 1.5px var(--color-primary); color: var(--color-primary); }
+.lang-picker ul { position: absolute; right: 0; top: calc(100% + 8px); margin: 0; padding: 6px; list-style: none; min-width: 210px; background: var(--color-surface); border-radius: var(--radius); box-shadow: var(--shadow), 0 0 0 1px var(--color-line); z-index: 6; }
+@media (max-width: 899px) {
+  .lang-picker { order: 2; margin-left: auto; }
+  .nav { order: 3; width: 100%; margin-left: 0; }
+}
+.lang-picker li a { white-space: nowrap; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; color: var(--color-ink); text-decoration: none; font-weight: 600; font-size: 15px; }
+.lang-picker li a:hover { background: var(--color-background); color: var(--color-primary); }
+.lang-picker li a[aria-current="true"] { background: var(--color-background); }
+.lang-picker li a[aria-current="true"]::after { content: ""; margin-left: auto; width: 5px; height: 10px; border-right: 2px solid var(--color-primary); border-bottom: 2px solid var(--color-primary); transform: rotate(45deg) translateY(-2px); }
+.flag { display: block; width: 20px; height: 14px; object-fit: cover; border-radius: 2px; box-shadow: 0 0 0 1px var(--color-line); }
 
 /* Buttons */
 .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; border: 0; cursor: pointer; font-family: var(--font-body); }

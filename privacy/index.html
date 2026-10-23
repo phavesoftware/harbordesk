@@ -6,8 +6,15 @@
   <title>Privacy policy · Harbor Desk</title>
   <meta name="description" content="How Harbor Desk collects, uses and protects information about visitors to this website, the cookies it sets, and how to opt out.">
   <link rel="canonical" href="https://phavesoftware.github.io/harbordesk/privacy/">
+  <link rel="alternate" hreflang="en-US" href="https://phavesoftware.github.io/harbordesk/privacy/">
+  <link rel="alternate" hreflang="en-CA" href="https://phavesoftware.github.io/harbordesk/en-ca/privacy/">
+  <link rel="alternate" hreflang="fr-CA" href="https://phavesoftware.github.io/harbordesk/fr-ca/privacy/">
+  <link rel="alternate" hreflang="x-default" href="https://phavesoftware.github.io/harbordesk/privacy/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Harbor Desk">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_CA">
+  <meta property="og:locale:alternate" content="fr_CA">
   <meta property="og:title" content="Privacy policy · Harbor Desk">
   <meta property="og:description" content="How Harbor Desk collects, uses and protects information about visitors to this website, the cookies it sets, and how to opt out.">
   <meta property="og:url" content="https://phavesoftware.github.io/harbordesk/privacy/">
@@ -43,6 +50,14 @@
         <li><a class="btn btn-primary" href="/harbordesk/demo/">Book a demo</a></li>
       </ul>
     </nav>
+    <details class="lang-picker">
+      <summary aria-label="Language: English (US)" title="Language"><img src="/harbordesk/assets/flags/us.svg" alt="" class="flag" width="20" height="14"><span>EN</span></summary>
+      <ul>
+          <li><a href="/harbordesk/privacy/" hreflang="en-US" lang="en-US" aria-current="true"><img src="/harbordesk/assets/flags/us.svg" alt="" class="flag" width="20" height="14"><span>English (US)</span></a></li>
+          <li><a href="/harbordesk/en-ca/privacy/" hreflang="en-CA" lang="en-CA"><img src="/harbordesk/assets/flags/ca.svg" alt="" class="flag" width="20" height="14"><span>English (Canada)</span></a></li>
+          <li><a href="/harbordesk/fr-ca/privacy/" hreflang="fr-CA" lang="fr-CA"><img src="/harbordesk/assets/flags/ca.svg" alt="" class="flag" width="20" height="14"><span>Français (Canada)</span></a></li>
+      </ul>
+    </details>
   </div>
 </header>
 <main id="main">
@@ -163,7 +178,7 @@
       visits.
     </p>
     <div class="consent-box">
-      <p id="consent-status">Choose whether this site records your visits.</p>
+      <p id="consent-status" data-granted="Tracking is allowed. This site records your visits." data-denied="You have opted out. This site no longer records your visits.">Choose whether this site records your visits.</p>
       <div class="actions">
         <button class="btn btn-primary" type="button" data-consent="false">
           Opt out of tracking
@@ -215,9 +230,7 @@
         } else {
           (phv.q = phv.q || []).push(["consent", granted]);
         }
-        status.textContent = granted
-          ? "Tracking is allowed. This site records your visits."
-          : "You have opted out. This site no longer records your visits.";
+        status.textContent = status.getAttribute(granted ? "data-granted" : "data-denied");
       });
     });
   })();

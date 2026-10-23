@@ -152,7 +152,11 @@ function socialCard(eyebrow, lines, subline, out) {
     fitTo: { mode: "width", value: 1200 },
     font: {
       loadSystemFonts: false,
-      fontFiles: [`${FONTS}/Manrope-800.ttf`, `${FONTS}/Inter-400.ttf`, `${FONTS}/Inter-600.ttf`],
+      fontFiles: [
+        `${FONTS}/Manrope-800.ttf`,
+        `${FONTS}/Inter-400.ttf`,
+        `${FONTS}/Inter-600.ttf`,
+      ],
       defaultFontFamily: "Inter",
     },
   })
@@ -179,6 +183,25 @@ socialCard(
   ],
   "60 minutes on Zoom · 8 companies per session · Nov and Dec 2026",
   "assets/og-workshop.png",
+);
+socialCard(
+  null,
+  [
+    ["Voyez venir l’attrition.", WHITE],
+    ["Agissez avant le renouvellement.", ACCENT],
+  ],
+  "La plateforme de réussite client des équipes SaaS B2B.",
+  "assets/og-image-fr.png",
+);
+socialCard(
+  "ATELIER GRATUIT EN DIRECT",
+  [
+    ["Décortiquer le risque d’attrition", WHITE],
+    ["Repérez les comptes à risque", ACCENT],
+    ["pendant qu’il est encore temps.", ACCENT],
+  ],
+  "60 minutes sur Zoom · 8 entreprises par séance · nov. et déc. 2026",
+  "assets/og-workshop-fr.png",
 );
 
 console.log(

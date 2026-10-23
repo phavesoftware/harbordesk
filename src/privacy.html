@@ -115,7 +115,7 @@
       visits.
     </p>
     <div class="consent-box">
-      <p id="consent-status">Choose whether this site records your visits.</p>
+      <p id="consent-status" data-granted="Tracking is allowed. This site records your visits." data-denied="You have opted out. This site no longer records your visits.">Choose whether this site records your visits.</p>
       <div class="actions">
         <button class="btn btn-primary" type="button" data-consent="false">
           Opt out of tracking
@@ -167,9 +167,7 @@
         } else {
           (phv.q = phv.q || []).push(["consent", granted]);
         }
-        status.textContent = granted
-          ? "Tracking is allowed. This site records your visits."
-          : "You have opted out. This site no longer records your visits.";
+        status.textContent = status.getAttribute(granted ? "data-granted" : "data-denied");
       });
     });
   })();

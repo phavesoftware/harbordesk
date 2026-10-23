@@ -1,0 +1,91 @@
+{
+  "": {
+    "title": "Harbor Desk : la plateforme de réussite client pour les entreprises SaaS B2B",
+    "description": "Harbor Desk donne aux équipes de réussite client des entreprises SaaS B2B des scores de santé fiables, des playbooks qui passent à l'action et des présentations d'EBR bâties à partir des données d'utilisation. Voyez venir l'attrition. Agissez avant le renouvellement.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "product/": {
+    "title": "Produit : Health Scores, Playbooks et EBR Builder · Harbor Desk",
+    "description": "Comment fonctionnent Health Scores, Playbooks et EBR Builder de Harbor Desk, qui se sert de chacun et un exemple concret pour chacun.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "customers/": {
+    "title": "Clients et études de cas · Harbor Desk",
+    "description": "Comment Tidewater Freight a réduit son attrition de 18 %, Northwind Analytics a augmenté sa rétention nette des revenus de 9 points et Lighthouse Payroll a fait passer la préparation de ses EBR de 6 heures à 40 minutes.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "pricing/": {
+    "title": "Prix : forfaits Starter, Growth et Enterprise · Harbor Desk",
+    "description": "Prix de Harbor Desk : Starter à partir de 24 500 $ par année, Growth à partir de 57 000 $ par année, Enterprise à partir de 122 000 $ par année. Prix en dollars canadiens. Frais de plateforme annuels, licences utilisateur CSM incluses. Parlez aux ventes pour obtenir une soumission.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "resources/": {
+    "title": "Ressources : le blogue de Harbor Desk pour les responsables de la réussite client",
+    "description": "Des textes pratiques pour les responsables de la réussite client sur les scores de santé, les playbooks et les revues d'affaires exécutives, signés par l'équipe de Harbor Desk.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "resources/building-a-health-score-your-csms-trust/": {
+    "title": "Bâtir un score de santé auquel vos CSM font confiance · Harbor Desk",
+    "description": "Un score de santé ne fonctionne que si les gens qui l'utilisent y croient. Cinq règles pour en bâtir un sur lequel vos CSM vont vraiment agir.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "resources/running-ebrs-that-renew/": {
+    "title": "Des EBR qui mènent au renouvellement · Harbor Desk",
+    "description": "La plupart des revues d'affaires exécutives sont des rapports d'étape que personne n'a demandés. Comment mener une EBR qui vous vaut la conversation sur le renouvellement.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "resources/playbooks-that-csms-dont-ignore/": {
+    "title": "Des playbooks que vos CSM n'ignoreront pas · Harbor Desk",
+    "description": "Les playbooks automatisés de réussite client échouent quand ils créent du travail que personne ne peut faire. Comment concevoir des playbooks qui se déclenchent rarement et qui comptent quand ils le font.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "about/": {
+    "title": "À propos de Harbor Desk : notre histoire, notre équipe et nos valeurs",
+    "description": "Harbor Desk a été fondée en 2019 à Portland, dans le Maine, par d'anciens responsables de la réussite client. 140 personnes, une seule mission : aider les équipes de réussite client à voir venir l'attrition et à agir avant le renouvellement.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "demo/": {
+    "title": "Réserver une démo · Harbor Desk",
+    "description": "Réservez une démo de Harbor Desk de 30 minutes avec un ou une spécialiste de la réussite client. Voyez Health Scores, Playbooks et EBR Builder sur des comptes comme les vôtres.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "demo/thanks/": {
+    "title": "Merci, nous vous contacterons sous peu · Harbor Desk",
+    "description": "Merci d'avoir réservé une démo de Harbor Desk. Un ou une spécialiste de la réussite client vous écrira par courriel d'ici un jour ouvrable.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "events/": {
+    "title": "Événements : ateliers en direct pour les responsables de la réussite client · Harbor Desk",
+    "description": "Des ateliers gratuits en direct de Harbor Desk pour les vice-présidences Réussite client, les Opérations de réussite client et les chefs de l'expérience client, dont l'atelier Décortiquer le risque d'attrition.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "events/churn-risk-teardown-workshop/": {
+    "title": "Atelier « Décortiquer le risque d'attrition » : une séance de travail gratuite de 60 minutes · Harbor Desk",
+    "description": "Une séance gratuite de 60 minutes en direct sur Zoom pour les responsables de la réussite client. Voyez comment votre équipe repère le risque d'attrition, où des comptes vous échappent avant le renouvellement et quelles conversations avoir plus tôt. 8 entreprises par séance.",
+    "og_alt": "Logo Harbor Desk avec le titre : Atelier « Décortiquer le risque d'attrition ». Voyez les comptes à risque pendant qu'il est encore temps d'en parler."
+  },
+  "events/churn-risk-teardown-workshop/thanks/": {
+    "title": "Merci, votre inscription est confirmée : atelier « Décortiquer le risque d'attrition » · Harbor Desk",
+    "description": "Votre inscription à l'atelier Décortiquer le risque d'attrition de Harbor Desk est confirmée. Surveillez l'arrivée d'une invitation de calendrier et d'un court courriel de préparation.",
+    "og_alt": "Logo Harbor Desk avec le titre : Atelier « Décortiquer le risque d'attrition »."
+  },
+  "brand/": {
+    "title": "Marque et dossier de presse · Harbor Desk",
+    "description": "Fichiers du logo de Harbor Desk, palette de couleurs avec valeurs hexadécimales, polices et règles de rédaction : ton, mots à éviter et majuscules des noms de produits.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "privacy/": {
+    "title": "Politique de confidentialité · Harbor Desk",
+    "description": "Comment Harbor Desk recueille, utilise et protège les renseignements sur les visiteurs de ce site Web, les témoins (cookies) qu'il dépose et comment refuser le suivi.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "terms/": {
+    "title": "Conditions d'utilisation · Harbor Desk",
+    "description": "Les conditions qui régissent l'utilisation du site Web de Harbor Desk.",
+    "og_alt": "Logo Harbor Desk avec la phrase : Voyez venir l'attrition. Agissez avant le renouvellement."
+  },
+  "_event": {
+    "name": "Atelier « Décortiquer le risque d'attrition »",
+    "description": "Une séance de travail de 60 minutes en direct pour les responsables de la réussite client : comment votre équipe repère le risque d'attrition aujourd'hui, où des comptes glissent entre les mailles avant le renouvellement et quelles conversations avec les clients devraient avoir lieu plus tôt."
+  }
+}

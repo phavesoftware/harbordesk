@@ -38,6 +38,27 @@ To regenerate the logo files, install the tools once into the gitignored
 Manrope 800 and Inter 400 TTFs in `.tools/fonts/`), then
 `node scripts/logo.mjs`.
 
+## Languages
+
+Every page exists in three languages, switched from the flag picker in the
+header (each page links to the same page in the others, with `hreflang`
+alternates and a sitemap entry per language):
+
+| Language | Path | Source |
+|---|---|---|
+| English (US) | `/harbordesk/` | `src/*.html`, the source of truth |
+| English (Canada) | `/harbordesk/en-ca/` | derived at build time by `scripts/en_ca.py` (Canadian spellings, prices in Canadian dollars); put a file in `src/en-ca/` to override a page |
+| Français (Canada) | `/harbordesk/fr-ca/` | `src/fr-ca/*.html`, titles and descriptions in `src/fr-ca/meta.json` |
+
+Edit a US page and the Canadian English page follows on the next build. The
+French page does not: update `src/fr-ca/` in the same change. Prices in
+Canadian dollars are one table in `en_ca.py` (`PRICES`); the French pages
+spell the same amounts. Links in a fragment written as `{{base}}/...` point
+at the page's own language; `{{base}}/assets/...` stays shared.
+
+The Phave form on the workshop page is the same form in every language, so
+it shows in English on the French page.
+
 ## Phave wiring
 
 - Subscription: **Harbor Desk** on staging (`stage.phave.dev`).
