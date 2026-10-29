@@ -2,12 +2,19 @@
 
 Run from the repo root: python3 scripts/build.py
 Every page is written as plain HTML (folder/index.html), so the published
-site needs no JavaScript and no build step on GitHub Pages.
+site needs no build step on GitHub Pages.
 
-Three languages: US English at the root (the source, src/*.html), Canadian
-English under en-ca/ (derived from the source by scripts/en_ca.py, or taken
-from src/en-ca/<file> where a page needs its own words) and Canadian French
-under fr-ca/ (src/fr-ca/*.html, titles and descriptions in src/fr-ca/meta.json).
+Three languages, each under its own path: US English under en-us/ (the
+source, src/*.html), British English under en-gb/ (derived from the source
+by scripts/en_gb.py, or taken from src/en-gb/<file> where a page needs its
+own words) and German under de-de/ (src/de-de/*.html, titles and
+descriptions in src/de-de/meta.json).
+
+Two variants of the whole site: the staging site at the root, carrying the
+staging Phave site tag, and a dev copy under dev/, carrying a tag served by
+a developer's local Phave (noindex, canonical to the staging page, out of
+the sitemap). The bare root of each variant, and every address the site had
+before the language paths, is a small redirect page.
 """
 from __future__ import annotations
 
@@ -17,40 +24,65 @@ from dataclasses import dataclass, replace
 from html import escape
 from pathlib import Path
 
-import en_ca
+import en_gb
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 BASE = "/harbordesk"
 ORIGIN = "https://phavesoftware.github.io"
 SITE_NAME = "Harbor Desk"
-LASTMOD = "2026-10-22"
-TAG = (
+LASTMOD = "2026-10-29"
+STAGING_TAG = (
     '<script async src="https://harbor-desk.phvtrack.dev/bambino.js" '
     'data-phv-tenant="harbor-desk" '
     'data-phv-key="phv_wk_PFesdDymtxDz-Sfh6mE4epN-Ikw8pBww" '
     'data-phv-consent="opt_out"></script>'
 )
+# Served by the developer's local Phave (Settings > Web > Write keys there).
+# Chrome lets an https page load it because localhost counts as secure.
+DEV_TAG = (
+    '<script async src="http://beacon.local-phave.localhost:3400/bambino.js" '
+    'data-phv-tenant="acme" '
+    'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ" '
+    'data-phv-consent="opt_out"></script>'
+)
+
+
+@dataclass(frozen=True)
+class Variant:
+    prefix: str  # "" for staging, "dev/" for the dev copy
+    tag: str
+    public: bool  # indexed and in the sitemap
+
+
+STAGING = Variant("", STAGING_TAG, True)
+DEV = Variant("dev/", DEV_TAG, False)
+VARIANTS = [STAGING, DEV]
 
 
 @dataclass(frozen=True)
 class Lang:
     code: str  # BCP 47, as html lang and hreflang
-    prefix: str  # "" for the source, else "en-ca/"
+    prefix: str  # "en-us/" etc.
     label: str  # the picker's name, in the language itself
     short: str  # the picker's closed face
     flag: str  # assets/flags/<flag>.svg
-    og_suffix: str  # "" or "-fr": which social card set the pages use
+    og_suffix: str  # "" or "-de": which social card set the pages use
+    currency: str  # ISO 4217, for structured data
 
 
 LANGS = [
-    Lang("en-US", "", "English (US)", "EN", "us", ""),
-    Lang("en-CA", "en-ca/", "English (Canada)", "EN", "ca", ""),
-    Lang("fr-CA", "fr-ca/", "Français (Canada)", "FR", "ca", "-fr"),
+    Lang("en-US", "en-us/", "English (US)", "EN", "us", "", "USD"),
+    Lang("en-GB", "en-gb/", "English (UK)", "EN", "gb", "", "GBP"),
+    Lang("de-DE", "de-de/", "Deutsch", "DE", "de", "-de", "EUR"),
 ]
 SOURCE = LANGS[0]
+BY_CODE = {lang.code: lang for lang in LANGS}
 
-# Every string the page chrome writes, per language. en-CA is derived.
+# Addresses the site had before the language paths, and where they go now.
+RETIRED_PREFIXES = {"": SOURCE, "en-ca/": SOURCE, "fr-ca/": SOURCE}
+
+# Every string the page chrome writes, per language. en-GB is derived.
 CHROME_EN = {
     "skip": "Skip to content",
     "logo_alt": "Harbor Desk logo",
@@ -59,6 +91,8 @@ CHROME_EN = {
             "resources": "Resources", "events": "Events", "about": "About"},
     "book": "Book a demo",
     "lang_label": "Language",
+    "dev_badge": "Dev",
+    "dev_title": "Dev copy: this page loads the Phave site tag from a local Phave",
     "tagline": "See churn coming. Act before renewal.",
     "country": "United States",
     "cols": {
@@ -74,42 +108,44 @@ CHROME_EN = {
     "rights": "&copy; 2026 Harbor Desk, Inc. All rights reserved.",
     "fictional": "Harbor Desk is a fictional company used for product demos.",
 }
-CHROME_FR = {
-    "skip": "Aller au contenu",
-    "logo_alt": "Logo Harbor Desk",
-    "nav_label": "Principal",
-    "nav": {"product": "Produit", "customers": "Clients", "pricing": "Tarifs",
-            "resources": "Ressources", "events": "Événements", "about": "À propos"},
-    "book": "Réserver une démo",
-    "lang_label": "Langue",
-    "tagline": "Voyez venir l'attrition. Agissez avant le renouvellement.",
-    "country": "États-Unis",
+CHROME_DE = {
+    "skip": "Zum Inhalt springen",
+    "logo_alt": "Harbor Desk Logo",
+    "nav_label": "Hauptmenü",
+    "nav": {"product": "Produkt", "customers": "Kunden", "pricing": "Preise",
+            "resources": "Ressourcen", "events": "Events", "about": "Über uns"},
+    "book": "Demo buchen",
+    "lang_label": "Sprache",
+    "dev_badge": "Dev",
+    "dev_title": "Dev-Kopie: Diese Seite lädt das Phave Site-Tag aus einem lokalen Phave",
+    "tagline": "Churn kommen sehen. Vor der Verlängerung handeln.",
+    "country": "Vereinigte Staaten",
     "cols": {
-        "Produit": [("product/", "Aperçu du produit"), ("product/#health-scores", "Health Scores"),
+        "Produkt": [("product/", "Produktüberblick"), ("product/#health-scores", "Health Scores"),
                     ("product/#playbooks", "Playbooks"), ("product/#ebr-builder", "EBR Builder"),
-                    ("pricing/", "Tarifs")],
-        "Entreprise": [("about/", "À propos"), ("customers/", "Clients"), ("resources/", "Ressources"),
-                       ("events/", "Événements"),
-                       ("events/churn-risk-teardown-workshop/", "Atelier « Décortiquer le risque d'attrition »"),
-                       ("brand/", "Marque et presse"), ("", "Accueil")],
-        "Pour commencer": [("demo/", "Réserver une démo"), ("demo/#talk-to-sales", "Parler aux ventes"),
-                           ("privacy/", "Politique de confidentialité"), ("terms/", "Conditions d'utilisation")],
+                    ("pricing/", "Preise")],
+        "Unternehmen": [("about/", "Über uns"), ("customers/", "Kunden"), ("resources/", "Ressourcen"),
+                        ("events/", "Events"),
+                        ("events/churn-risk-teardown-workshop/", "Workshop „Churn-Risiko auf dem Prüfstand“"),
+                        ("brand/", "Marke und Presse"), ("", "Startseite")],
+        "Erste Schritte": [("demo/", "Demo buchen"), ("demo/#talk-to-sales", "Mit dem Vertrieb sprechen"),
+                           ("privacy/", "Datenschutzerklärung"), ("terms/", "Nutzungsbedingungen")],
     },
-    "rights": "&copy; 2026 Harbor Desk, Inc. Tous droits réservés.",
-    "fictional": "Harbor Desk est une entreprise fictive utilisée pour des démonstrations de produit.",
+    "rights": "&copy; 2026 Harbor Desk, Inc. Alle Rechte vorbehalten.",
+    "fictional": "Harbor Desk ist ein fiktives Unternehmen für Produktdemos.",
 }
 
 
-def _en_ca_chrome(chrome: dict) -> dict:
+def _en_gb_chrome(chrome: dict) -> dict:
     out = json.loads(json.dumps(chrome))
-    out["nav"] = {k: en_ca.text(v) for k, v in out["nav"].items()}
-    out["cols"] = {en_ca.text(t): [(p, en_ca.text(l)) for p, l in links] for t, links in out["cols"].items()}
+    out["nav"] = {k: en_gb.text(v) for k, v in out["nav"].items()}
+    out["cols"] = {en_gb.text(t): [(p, en_gb.text(l)) for p, l in links] for t, links in out["cols"].items()}
     for key in ("tagline", "book"):
-        out[key] = en_ca.text(out[key])
+        out[key] = en_gb.text(out[key])
     return out
 
 
-CHROME = {"en-US": CHROME_EN, "en-CA": _en_ca_chrome(CHROME_EN), "fr-CA": CHROME_FR}
+CHROME = {"en-US": CHROME_EN, "en-GB": _en_gb_chrome(CHROME_EN), "de-DE": CHROME_DE}
 
 WORKSHOP_PATH = "events/churn-risk-teardown-workshop/"
 WORKSHOP_SESSIONS = [
@@ -122,6 +158,10 @@ WORKSHOP_EN = {
     "name": "Churn-risk teardown workshop",
     "description": "A 60-minute live working session for customer success leaders: how your team flags churn risk today, where accounts slip through before renewal, and which customer conversations should happen sooner.",
 }
+
+# The variant being written. Set once per pass by build(); every URL the
+# pages link to (other than shared assets) stays inside it.
+_variant = STAGING
 
 
 def workshop_events(lang: Lang, words: dict) -> list[dict]:
@@ -141,7 +181,7 @@ def workshop_events(lang: Lang, words: dict) -> list[dict]:
             "image": f"{ORIGIN}{BASE}/assets/og-workshop{lang.og_suffix}.png",
             "maximumAttendeeCapacity": 8,
             "isAccessibleForFree": True,
-            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD" if lang is SOURCE else "CAD",
+            "offers": {"@type": "Offer", "price": "0", "priceCurrency": lang.currency,
                        "url": f"{page_url}#reserve", "availability": "https://schema.org/LimitedAvailability"},
             "organizer": {"@type": "Organization", "name": "Harbor Desk", "url": f"{ORIGIN}{url('', lang)}"},
             "performer": [
@@ -156,7 +196,7 @@ def workshop_events(lang: Lang, words: dict) -> list[dict]:
 @dataclass
 class Page:
     path: str  # "" for home, else "pricing/" etc.
-    source: str  # fragment file under src/ (and src/fr-ca/)
+    source: str  # fragment file under src/ (and src/de-de/)
     title: str
     description: str
     nav: str | None = None  # header nav key this page highlights
@@ -220,8 +260,13 @@ NAV_PATHS = {key: f"{key}/" for key in HEADER_NAV}
 SHARED_FILES = re.compile(r"^/(assets/|favicon|apple-touch-icon|sitemap\.xml|robots\.txt)")
 
 
-def url(path: str, lang: Lang = SOURCE) -> str:
-    return f"{BASE}/{lang.prefix}{path}"
+def url(path: str, lang: Lang = SOURCE, variant: Variant | None = None) -> str:
+    variant = variant or _variant
+    return f"{BASE}/{variant.prefix}{lang.prefix}{path}"
+
+
+def asset(path: str) -> str:
+    return f"{BASE}/{path}"
 
 
 def localize_links(body: str, lang: Lang) -> str:
@@ -229,32 +274,32 @@ def localize_links(body: str, lang: Lang) -> str:
         rest = m.group(1) or ""
         if SHARED_FILES.match(rest):
             return f"{BASE}{rest}"
-        return f"{BASE}/{lang.prefix}{rest.lstrip('/')}"
+        return url(rest.lstrip("/"), lang)
 
     return re.sub(r"\{\{base\}\}(/[^\"'\s<>)]*)?", swap, body)
 
 
 def page_for(page: Page, lang: Lang) -> Page:
     """The page's metadata in a language."""
-    if lang.code == "en-CA":
-        return replace(page, title=en_ca.text(page.title), description=en_ca.text(page.description))
-    if lang.code == "fr-CA":
-        meta = FR_META[page.path]
+    if lang.code == "en-GB":
+        return replace(page, title=en_gb.text(page.title), description=en_gb.text(page.description))
+    if lang.code == "de-DE":
+        meta = DE_META[page.path]
         return replace(page, title=meta["title"], description=meta["description"], og_alt=meta["og_alt"])
     return page
 
 
 def fragment(page: Page, lang: Lang) -> str:
-    if lang.code == "fr-CA":
-        return (SRC / "fr-ca" / page.source).read_text()
-    if lang.code == "en-CA":
-        own = SRC / "en-ca" / page.source
-        return own.read_text() if own.exists() else en_ca.html((SRC / page.source).read_text())
+    if lang.code == "de-DE":
+        return (SRC / "de-de" / page.source).read_text()
+    if lang.code == "en-GB":
+        own = SRC / "en-gb" / page.source
+        return own.read_text() if own.exists() else en_gb.html((SRC / page.source).read_text())
     return (SRC / page.source).read_text()
 
 
 def flag(lang: Lang) -> str:
-    return f'<img src="{url(f"assets/flags/{lang.flag}.svg")}" alt="" class="flag" width="20" height="14">'
+    return f'<img src="{asset(f"assets/flags/{lang.flag}.svg")}" alt="" class="flag" width="20" height="14">'
 
 
 def language_picker(page: Page, lang: Lang) -> str:
@@ -275,6 +320,13 @@ def language_picker(page: Page, lang: Lang) -> str:
     </details>"""
 
 
+def dev_badge(lang: Lang) -> str:
+    if _variant.public:
+        return ""
+    chrome = CHROME[lang.code]
+    return f'\n    <span class="dev-badge" title="{chrome["dev_title"]}">{chrome["dev_badge"]}</span>'
+
+
 def header(page: Page, lang: Lang) -> str:
     chrome = CHROME[lang.code]
     items = []
@@ -286,7 +338,7 @@ def header(page: Page, lang: Lang) -> str:
     nav_items = "\n        ".join(items)
     return f"""<header class="site-header">
   <div class="wrap">
-    <a href="{url("", lang)}" class="logo-link"><img src="{url("assets/logo.svg")}" alt="{chrome["logo_alt"]}" class="logo" width="172" height="36"></a>
+    <a href="{url("", lang)}" class="logo-link"><img src="{asset("assets/logo.svg")}" alt="{chrome["logo_alt"]}" class="logo" width="172" height="36"></a>{dev_badge(lang)}
     <nav class="nav" aria-label="{chrome["nav_label"]}">
       <ul>
         {nav_items}
@@ -314,7 +366,7 @@ def footer(lang: Lang) -> str:
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="{url("assets/logo-white.svg")}" alt="{chrome["logo_alt"]}" class="footer-logo" width="143" height="30">
+        <img src="{asset("assets/logo-white.svg")}" alt="{chrome["logo_alt"]}" class="footer-logo" width="143" height="30">
         <p>{chrome["tagline"]}</p>
         <address>Harbor Desk, Inc.<br>220 Wharf Street<br>Portland, ME 04101<br>{chrome["country"]}</address>
       </div>
@@ -334,7 +386,7 @@ def organization(lang: Lang) -> dict:
         "@type": "Organization",
         "name": "Harbor Desk",
         "legalName": "Harbor Desk, Inc.",
-        "url": f"{ORIGIN}{url('', lang)}",
+        "url": f"{ORIGIN}{url('', lang, STAGING)}",
         "logo": f"{ORIGIN}{BASE}/assets/logo.png",
         "slogan": CHROME[lang.code]["tagline"],
         "description": "Harbor Desk is a customer success platform for B2B SaaS companies with 50 to 2,000 employees: health scores, playbooks and executive business reviews built from usage data.",
@@ -358,16 +410,17 @@ def alternates(page: Page) -> str:
 
 
 def head(page: Page, lang: Lang) -> str:
-    canonical = f"{ORIGIN}{url(page.path, lang)}"
-    og_image = f"{ORIGIN}{url(f'assets/{page.og_image}{lang.og_suffix}.png')}"
+    # The dev copy points search engines at the staging page it mirrors.
+    canonical = f"{ORIGIN}{url(page.path, lang, STAGING)}"
+    og_image = f"{ORIGIN}{asset(f'assets/{page.og_image}{lang.og_suffix}.png')}"
     og_alt = escape(page.og_alt)
     ld = [organization(lang)]
     if page.workshop:
-        ld.append(workshop_events(lang, FR_META["_event"] if lang.code == "fr-CA" else WORKSHOP_EN))
+        ld.append(workshop_events(lang, DE_META["_event"] if lang.code == "de-DE" else WORKSHOP_EN))
     page_ld = "".join(f'\n  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)
     title = escape(page.title)
     desc = escape(page.description)
-    robots = "" if page.index else '\n  <meta name="robots" content="noindex">'
+    robots = "" if page.index and _variant.public else '\n  <meta name="robots" content="noindex">'
     og_locale = lang.code.replace("-", "_")
     others = "".join(f'\n  <meta property="og:locale:alternate" content="{l.code.replace("-", "_")}">' for l in LANGS if l is not lang)
     return f"""<head>
@@ -388,20 +441,20 @@ def head(page: Page, lang: Lang) -> str:
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{og_alt}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="{url("favicon.ico")}" sizes="any">
-  <link rel="icon" href="{url("favicon.svg")}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{url("apple-touch-icon.png")}">
+  <link rel="icon" href="{asset("favicon.ico")}" sizes="any">
+  <link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{asset("apple-touch-icon.png")}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap">
-  <link rel="stylesheet" href="{url("assets/site.css")}">{page_ld}
+  <link rel="stylesheet" href="{asset("assets/site.css")}">{page_ld}
   <!-- PHAVE SITE TAG GOES HERE -->
-  {TAG}
+  {_variant.tag}
 </head>"""
 
 
 def render(page: Page, lang: Lang) -> str:
-    body = localize_links(fragment(page, lang), lang)
+    body = localize_links(fragment(page, lang), lang).replace("{{tag}}", _variant.tag)
     h1_count = len(re.findall(r"<h1[\s>]", body))
     if h1_count != 1:
         raise SystemExit(f"{lang.prefix}{page.source}: expected one <h1>, found {h1_count}")
@@ -421,6 +474,39 @@ def render(page: Page, lang: Lang) -> str:
 """
 
 
+def redirect(target: str, pick_language: bool = False) -> str:
+    """A page that sends the visitor on to `target`, keeping any #fragment.
+    The bare root of a variant picks a language from the browser first."""
+    pick = ""
+    if pick_language:
+        base = target[: -len(SOURCE.prefix)]
+        pick = f"""
+    var langs = (navigator.languages || [navigator.language || ""]).map(function (l) {{ return l.toLowerCase(); }});
+    for (var i = 0; i < langs.length; i++) {{
+      if (langs[i].indexOf("de") === 0) {{ to = "{base}de-de/"; break; }}
+      if (langs[i] === "en-gb" || langs[i] === "en-ie") {{ to = "{base}en-gb/"; break; }}
+      if (langs[i].indexOf("en") === 0) break;
+    }}"""
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>Harbor Desk</title>
+  <link rel="canonical" href="{ORIGIN}{target}">
+  <meta http-equiv="refresh" content="0; url={target}">
+  <script>
+    var to = "{target}";{pick}
+    location.replace(to + location.hash);
+  </script>
+</head>
+<body>
+  <p><a href="{target}">Harbor Desk</a></p>
+</body>
+</html>
+"""
+
+
 def word_count(html: str) -> int:
     text = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
     text = re.sub(r"<[^>]+>", " ", text)
@@ -433,11 +519,11 @@ def sitemap() -> str:
         if not page.index:
             continue
         alts = "".join(
-            f'\n    <xhtml:link rel="alternate" hreflang="{l.code}" href="{ORIGIN}{url(page.path, l)}"/>' for l in LANGS
+            f'\n    <xhtml:link rel="alternate" hreflang="{l.code}" href="{ORIGIN}{url(page.path, l, STAGING)}"/>' for l in LANGS
         )
         for lang in LANGS:
             entries.append(
-                f"  <url>\n    <loc>{ORIGIN}{url(page.path, lang)}</loc>\n    <lastmod>{LASTMOD}</lastmod>{alts}\n  </url>"
+                f"  <url>\n    <loc>{ORIGIN}{url(page.path, lang, STAGING)}</loc>\n    <lastmod>{LASTMOD}</lastmod>{alts}\n  </url>"
             )
     body = "\n".join(entries)
     return (
@@ -447,21 +533,36 @@ def sitemap() -> str:
     )
 
 
-FR_META: dict = json.loads((SRC / "fr-ca" / "meta.json").read_text())
+DE_META: dict = json.loads((SRC / "de-de" / "meta.json").read_text())
+
+
+def write(rel: str, html: str) -> None:
+    out = ROOT / rel / "index.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(html)
+
+
+def build(variant: Variant) -> None:
+    global _variant
+    _variant = variant
+    for lang in LANGS:
+        for page in PAGES:
+            write(f"{variant.prefix}{lang.prefix}{page.path}", render(page, lang))
+            print(f"{url(page.path, lang):82} {word_count(fragment(page, lang)):5} words")
+    for old, lang in RETIRED_PREFIXES.items() if variant.public else ():
+        for page in PAGES:
+            if old == "" and page.path == "":
+                continue
+            write(f"{variant.prefix}{old}{page.path}", redirect(url(page.path, lang)))
+    write(variant.prefix, redirect(url("", SOURCE), pick_language=True))
 
 
 def main() -> None:
-    for lang in LANGS:
-        for page in PAGES:
-            out = ROOT / lang.prefix / page.path / "index.html"
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(render(page, lang))
-            words = word_count(fragment(page, lang))
-            print(f"{url(page.path, lang):76} {words:5} words")
-
+    for variant in VARIANTS:
+        build(variant)
     (ROOT / "sitemap.xml").write_text(sitemap())
     (ROOT / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\n\nSitemap: {ORIGIN}{url('sitemap.xml')}\n"
+        f"User-agent: *\nAllow: /\nDisallow: {BASE}/dev/\n\nSitemap: {ORIGIN}{asset('sitemap.xml')}\n"
     )
 
 

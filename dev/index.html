@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>Harbor Desk</title>
+  <link rel="canonical" href="https://phavesoftware.github.io/harbordesk/dev/en-us/">
+  <meta http-equiv="refresh" content="0; url=/harbordesk/dev/en-us/">
+  <script>
+    var to = "/harbordesk/dev/en-us/";
+    var langs = (navigator.languages || [navigator.language || ""]).map(function (l) { return l.toLowerCase(); });
+    for (var i = 0; i < langs.length; i++) {
+      if (langs[i].indexOf("de") === 0) { to = "/harbordesk/dev/de-de/"; break; }
+      if (langs[i] === "en-gb" || langs[i] === "en-ie") { to = "/harbordesk/dev/en-gb/"; break; }
+      if (langs[i].indexOf("en") === 0) break;
+    }
+    location.replace(to + location.hash);
+  </script>
+</head>
+<body>
+  <p><a href="/harbordesk/dev/en-us/">Harbor Desk</a></p>
+</body>
+</html>

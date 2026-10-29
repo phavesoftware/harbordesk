@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /harbordesk/dev/
 
 Sitemap: https://phavesoftware.github.io/harbordesk/sitemap.xml
