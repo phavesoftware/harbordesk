@@ -1,0 +1,91 @@
+{
+  "": {
+    "title": "Harbor Desk: die Customer-Success-Plattform für B2B-SaaS",
+    "description": "Harbor Desk gibt Customer-Success-Teams in B2B-SaaS-Unternehmen Health Scores, denen sie vertrauen, Playbooks, die darauf reagieren, und EBR-Präsentationen aus Nutzungsdaten. Churn kommen sehen. Vor der Verlängerung handeln.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "product/": {
+    "title": "Produkt: Health Scores, Playbooks und EBR Builder · Harbor Desk",
+    "description": "Wie Health Scores, Playbooks und der EBR Builder von Harbor Desk funktionieren, wer was nutzt und je ein konkretes Beispiel.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "customers/": {
+    "title": "Kunden und Fallstudien · Harbor Desk",
+    "description": "Wie Tidewater Freight den Churn um 18 % gesenkt, Northwind Analytics die Net Revenue Retention um 9 Punkte gesteigert und Lighthouse Payroll die EBR-Vorbereitung von 6 Stunden auf 40 Minuten verkürzt hat.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "pricing/": {
+    "title": "Preise: die Pläne Starter, Growth und Enterprise · Harbor Desk",
+    "description": "Preise von Harbor Desk: Starter ab 16.500 € pro Jahr, Growth ab 38.500 € pro Jahr, Enterprise ab 83.000 € pro Jahr. Jährliche Plattformgebühr, CSM-Lizenzen inklusive. Für ein Angebot sprechen Sie mit dem Vertrieb.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "resources/": {
+    "title": "Ressourcen: der Harbor-Desk-Blog für Customer-Success-Führungskräfte",
+    "description": "Praxisnahe Texte für Customer-Success-Führungskräfte über Health Scores, Playbooks und Executive Business Reviews, vom Team von Harbor Desk.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "resources/building-a-health-score-your-csms-trust/": {
+    "title": "Ein Health Score, dem Ihre CSMs vertrauen · Harbor Desk",
+    "description": "Ein Health Score funktioniert nur, wenn die Menschen, die ihn nutzen, ihm glauben. Fünf Regeln für einen Score, nach dem Ihre CSMs tatsächlich handeln.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "resources/running-ebrs-that-renew/": {
+    "title": "EBRs, die zur Verlängerung führen · Harbor Desk",
+    "description": "Die meisten Executive Business Reviews sind Statusberichte, um die niemand gebeten hat. So führen Sie ein EBR, das Ihnen das Gespräch über die Verlängerung verschafft.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "resources/playbooks-that-csms-dont-ignore/": {
+    "title": "Playbooks, die Ihre CSMs nicht ignorieren · Harbor Desk",
+    "description": "Automatisierte Customer-Success-Playbooks scheitern, wenn sie Arbeit erzeugen, die niemand erledigen kann. So gestalten Sie Playbooks, die selten auslösen und dann zählen.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "about/": {
+    "title": "Über Harbor Desk: unsere Geschichte, unser Team und unsere Werte",
+    "description": "Harbor Desk wurde 2019 in Portland, Maine, von ehemaligen Customer-Success-Führungskräften gegründet. 140 Menschen, eine Aufgabe: CS-Teams helfen, Churn kommen zu sehen und vor der Verlängerung zu handeln.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "demo/": {
+    "title": "Demo buchen · Harbor Desk",
+    "description": "Buchen Sie eine 30-minütige Demo von Harbor Desk mit einer Customer-Success-Fachperson. Sehen Sie Health Scores, Playbooks und den EBR Builder an Accounts wie Ihren.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "demo/thanks/": {
+    "title": "Danke, wir melden uns · Harbor Desk",
+    "description": "Danke für Ihre Demo-Buchung bei Harbor Desk. Eine Customer-Success-Fachperson schreibt Ihnen innerhalb eines Werktags per E-Mail.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "events/": {
+    "title": "Events: Live-Workshops für Customer-Success-Führungskräfte · Harbor Desk",
+    "description": "Kostenlose Live-Workshops von Harbor Desk für VPs Customer Success, CS Operations und Chief Customer Officers, darunter der Workshop „Churn-Risiko auf dem Prüfstand“.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "events/churn-risk-teardown-workshop/": {
+    "title": "Workshop „Churn-Risiko auf dem Prüfstand“: eine kostenlose 60-minütige Arbeitssitzung · Harbor Desk",
+    "description": "Eine kostenlose 60-minütige Live-Session auf Zoom für CS-Führungskräfte. Arbeiten Sie durch, wie Ihr Team Churn-Risiko erkennt, wo Accounts vor der Verlängerung durchrutschen und welche Gespräche Sie früher führen sollten. 8 Unternehmen pro Termin.",
+    "og_alt": "Harbor-Desk-Logo mit dem Titel: Workshop „Churn-Risiko auf dem Prüfstand“. Gefährdete Accounts erkennen, solange noch Zeit für ein Gespräch ist."
+  },
+  "events/churn-risk-teardown-workshop/thanks/": {
+    "title": "Danke, Sie sind angemeldet: Workshop „Churn-Risiko auf dem Prüfstand“ · Harbor Desk",
+    "description": "Sie sind für den Workshop „Churn-Risiko auf dem Prüfstand“ von Harbor Desk angemeldet. Achten Sie auf eine Kalendereinladung und eine kurze E-Mail zur Vorbereitung.",
+    "og_alt": "Harbor-Desk-Logo mit dem Titel: Workshop „Churn-Risiko auf dem Prüfstand“."
+  },
+  "brand/": {
+    "title": "Marke und Pressematerial · Harbor Desk",
+    "description": "Logodateien von Harbor Desk, Farbpalette mit Hex-Werten, Schriften und die Regeln, nach denen wir schreiben: Ton, Wörter, die wir vermeiden, und die Schreibweise der Produktnamen.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "privacy/": {
+    "title": "Datenschutzerklärung · Harbor Desk",
+    "description": "Wie Harbor Desk Informationen über Besucher dieser Website erhebt, nutzt und schützt, welche Cookies gesetzt werden und wie Sie widersprechen können.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "terms/": {
+    "title": "Nutzungsbedingungen · Harbor Desk",
+    "description": "Die Bedingungen für die Nutzung der Website von Harbor Desk.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "_event": {
+    "name": "Workshop „Churn-Risiko auf dem Prüfstand“",
+    "description": "Eine 60-minütige Live-Arbeitssitzung für Customer-Success-Führungskräfte: wie Ihr Team Churn-Risiko heute erkennt, wo Accounts vor der Verlängerung durchrutschen und welche Kundengespräche früher stattfinden sollten."
+  }
+}

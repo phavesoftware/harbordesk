@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="de-DE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produkt: Health Scores, Playbooks und EBR Builder · Harbor Desk</title>
+  <meta name="description" content="Wie Health Scores, Playbooks und der EBR Builder von Harbor Desk funktionieren, wer was nutzt und je ein konkretes Beispiel.">
+  <link rel="canonical" href="https://phavesoftware.github.io/harbordesk/de-de/product/">
+  <link rel="alternate" hreflang="en-US" href="https://phavesoftware.github.io/harbordesk/en-us/product/">
+  <link rel="alternate" hreflang="en-GB" href="https://phavesoftware.github.io/harbordesk/en-gb/product/">
+  <link rel="alternate" hreflang="de-DE" href="https://phavesoftware.github.io/harbordesk/de-de/product/">
+  <link rel="alternate" hreflang="x-default" href="https://phavesoftware.github.io/harbordesk/en-us/product/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Harbor Desk">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:title" content="Produkt: Health Scores, Playbooks und EBR Builder · Harbor Desk">
+  <meta property="og:description" content="Wie Health Scores, Playbooks und der EBR Builder von Harbor Desk funktionieren, wer was nutzt und je ein konkretes Beispiel.">
+  <meta property="og:url" content="https://phavesoftware.github.io/harbordesk/de-de/product/">
+  <meta property="og:image" content="https://phavesoftware.github.io/harbordesk/assets/og-image-de.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/harbordesk/favicon.ico" sizes="any">
+  <link rel="icon" href="/harbordesk/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/harbordesk/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap">
+  <link rel="stylesheet" href="/harbordesk/assets/site.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Harbor Desk", "legalName": "Harbor Desk, Inc.", "url": "https://phavesoftware.github.io/harbordesk/de-de/", "logo": "https://phavesoftware.github.io/harbordesk/assets/logo.png", "slogan": "Churn kommen sehen. Vor der Verlängerung handeln.", "description": "Harbor Desk is a customer success platform for B2B SaaS companies with 50 to 2,000 employees: health scores, playbooks and executive business reviews built from usage data.", "foundingDate": "2019", "numberOfEmployees": {"@type": "QuantitativeValue", "value": 140}, "address": {"@type": "PostalAddress", "streetAddress": "220 Wharf Street", "addressLocality": "Portland", "addressRegion": "ME", "postalCode": "04101", "addressCountry": "US"}}</script>
+  <!-- PHAVE SITE TAG GOES HERE -->
+  <script async src="https://harbor-desk.phvtrack.dev/bambino.js" data-phv-tenant="harbor-desk" data-phv-key="phv_wk_PFesdDymtxDz-Sfh6mE4epN-Ikw8pBww" data-phv-consent="opt_out"></script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/harbordesk/de-de/" class="logo-link"><img src="/harbordesk/assets/logo.svg" alt="Harbor Desk Logo" class="logo" width="172" height="36"></a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <ul>
+        <li><a href="/harbordesk/de-de/product/" aria-current="page">Produkt</a></li>
+        <li><a href="/harbordesk/de-de/customers/">Kunden</a></li>
+        <li><a href="/harbordesk/de-de/pricing/">Preise</a></li>
+        <li><a href="/harbordesk/de-de/resources/">Ressourcen</a></li>
+        <li><a href="/harbordesk/de-de/events/">Events</a></li>
+        <li><a href="/harbordesk/de-de/about/">Über uns</a></li>
+        <li><a class="btn btn-primary" href="/harbordesk/de-de/demo/">Demo buchen</a></li>
+      </ul>
+    </nav>
+    <details class="lang-picker">
+      <summary aria-label="Sprache: Deutsch" title="Sprache"><img src="/harbordesk/assets/flags/de.svg" alt="" class="flag" width="20" height="14"><span>DE</span></summary>
+      <ul>
+          <li><a href="/harbordesk/en-us/product/" hreflang="en-US" lang="en-US"><img src="/harbordesk/assets/flags/us.svg" alt="" class="flag" width="20" height="14"><span>English (US)</span></a></li>
+          <li><a href="/harbordesk/en-gb/product/" hreflang="en-GB" lang="en-GB"><img src="/harbordesk/assets/flags/gb.svg" alt="" class="flag" width="20" height="14"><span>English (UK)</span></a></li>
+          <li><a href="/harbordesk/de-de/product/" hreflang="de-DE" lang="de-DE" aria-current="true"><img src="/harbordesk/assets/flags/de.svg" alt="" class="flag" width="20" height="14"><span>Deutsch</span></a></li>
+      </ul>
+    </details>
+  </div>
+</header>
+<main id="main">
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Produkt</p>
+    <h1>Health Scores, Playbooks und der EBR Builder.</h1>
+    <p>
+      Harbor Desk erledigt drei Aufgaben für ein Customer-Success-Team: zeigen,
+      welche Accounts abdriften, vor der Verlängerung darauf reagieren und dem
+      Executive Sponsor den Wert belegen. Hier sehen Sie, wie die einzelnen
+      Teile funktionieren, wer sie nutzt und wie das an einem echten Account
+      aussieht.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="health-scores">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">01 · Health Scores</p>
+      <h2>Ein Score, den Ihre CSMs in einem Satz erklären können.</h2>
+      <p>
+        Jeder Account bekommt einen Health Score von 0 bis 100, jede Nacht neu
+        berechnet. Der Score setzt sich aus den Signalen zusammen, die in Ihrem
+        Geschäft Churn vorhersagen, gewichtet so, wie Ihr Team es für richtig
+        hält: wöchentlich aktive Nutzer im Verhältnis zu verkauften Lizenzen,
+        Nutzung der Funktionen, die an die Ziele des Kunden geknüpft sind,
+        offene und eskalierte Support-Tickets, Wechsel beim Executive Sponsor,
+        NPS-Antworten und überfällige Rechnungen.
+      </p>
+      <p>
+        Jeder Score zeigt seinen Rechenweg. Öffnen Sie einen Account, und Sie
+        sehen, welche Signale ihn bewegt haben, wie stark und seit wann. Ein
+        Score, der sich nicht selbst erklären kann, wird nicht genutzt. Deshalb
+        liefern wir keinen solchen aus.
+      </p>
+      <p>
+        <strong>Wer es nutzt:</strong> CSMs schauen jeden Morgen darauf, um
+        ihren Tag zu planen. CS Operations verantwortet das Modell und
+        justiert die Gewichtungen. CS-Leiter sehen in der Portfolioansicht das
+        Risiko nach Segment, Region und Verlängerungsquartal.
+      </p>
+    </div>
+    <div>
+      <div class="example">
+        <p>
+          <strong>Beispiel.</strong> Ein Account mit 800 Lizenzen, der in 120
+          Tagen verlängert, fällt innerhalb von drei Wochen von 82 auf 61. Die
+          Account-Seite zeigt, warum: Die wöchentlich aktiven Nutzer sind nach
+          einer Umstrukturierung von 610 auf 430 gesunken, und zwei eskalierte
+          Tickets zum Reporting-Modul sind noch offen. Der CSM weiß, worüber er
+          sprechen muss, bevor er die E-Mail öffnet.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li>Scores von 0 bis 100, mit grünen, gelben und roten Bereichen, die Sie festlegen</li>
+        <li>Eigene Modelle pro Segment (zum Beispiel SMB und Enterprise)</li>
+        <li>Jedes Signal und jede Gewichtung auf der Account-Seite sichtbar</li>
+        <li>Score-Verlauf, damit Sie einen Trend sehen und nicht nur eine Zahl</li>
+        <li>Backtesting gegen Ihre Verlängerungen der letzten acht Quartale</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="playbooks">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">02 · Playbooks</p>
+      <h2>Wenn sich der Health Score ändert, passiert etwas.</h2>
+      <p>
+        Ein Playbook ist eine Regel plus eine Reihe von Aktionen. Überschreitet
+        ein Account einen Schwellenwert oder schlägt ein bestimmtes Signal an,
+        läuft das Playbook: Es legt Aufgaben für die richtigen Leute an,
+        entwirft E-Mails, die der CSM prüft, postet in einen Slack-Channel,
+        aktualisiert ein Feld in Salesforce oder HubSpot und setzt den Account
+        auf eine Review-Liste.
+      </p>
+      <p>
+        Playbooks schreibt CS Operations in einfachen Bedingungen, nicht in
+        Code. Jedes zeigt, wie oft es im letzten Quartal ausgelöst wurde und
+        was mit den betroffenen Accounts passiert ist. So können Sie die
+        Playbooks abschalten, die Arbeit erzeugen, ohne etwas am Ergebnis zu
+        ändern.
+      </p>
+      <p>
+        <strong>Wer es nutzt:</strong> CS Operations baut und pflegt die
+        Playbooks. CSMs arbeiten die Aufgaben ab, die daraus entstehen.
+        CS-Leiter sehen, welche Playbooks die Kundenbindung verbessern und
+        welche nur Rauschen sind.
+      </p>
+    </div>
+    <div>
+      <div class="example">
+        <p>
+          <strong>Beispiel.</strong> Das Playbook „Sponsor-Wechsel“ wird
+          ausgelöst, wenn die E-Mail-Adresse des Executive Sponsors nicht mehr
+          zustellbar ist oder sich sein Titel im CRM ändert. Innerhalb einer
+          Stunde hat der CSM eine Aufgabe, den neuen Sponsor zu finden, einen
+          Entwurf für die Vorstellungs-E-Mail, und der Account steht auf der
+          Risiko-Review am Montag. Tidewater Freight setzt dieses Playbook für
+          1.400 Accounts ein.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li>Auslöser: Score-Bereiche, Score-Einbrüche, einzelne Signale oder Termine</li>
+        <li>Aktionen: Aufgaben, E-Mail-Entwürfe, Slack-Posts, CRM-Feldupdates</li>
+        <li>Jede E-Mail an Kunden wird von einem Menschen geprüft, immer</li>
+        <li>
+          Ruhezeiten und Limits pro Account, damit niemand fünf E-Mails in einer
+          Woche bekommt
+        </li>
+        <li>Ergebnis-Reporting pro Playbook</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ebr-builder">
+  <div class="wrap grid-2">
+    <div>
+      <p class="eyebrow">03 · EBR Builder</p>
+      <h2>EBR-Decks aus Daten, nicht aus Sonntagabenden.</h2>
+      <p>
+        Der EBR Builder stellt ein Deck für das Executive Business Review aus
+        den Daten zusammen, die Harbor Desk bereits hat: Nutzung der letzten
+        zwei Quartale, Fortschritt bei den Zielen, die der Kunde beim Kickoff
+        gesetzt hat, Support-Volumen und Lösungszeiten sowie der gelieferte
+        Wert in den Begriffen des Kunden. Dazu kommt ein empfohlener nächster
+        Schritt, abgeleitet aus Health Score und Vertrag des Accounts.
+      </p>
+      <p>
+        Ihr CSM überarbeitet die Story, streicht, was für diese Führungskraft
+        keine Rolle spielt, und exportiert nach Google Slides, PowerPoint oder
+        PDF im Template Ihres Unternehmens. Die Zahlen sind immer aktuell, und
+        es sind immer dieselben Zahlen, die der Rest des Unternehmens sieht.
+      </p>
+      <p>
+        <strong>Wer es nutzt:</strong> CSMs und Account Manager bauen Decks
+        vor den Quartalsreviews. CS-Leiter nutzen dieselben Daten für das
+        Board-Reporting zur Kundenbindung.
+      </p>
+    </div>
+    <div>
+      <div class="example">
+        <p>
+          <strong>Beispiel.</strong> Vor einem Quartalsreview mit einem Kunden
+          mit 300 Lizenzen öffnet der CSM den EBR Builder. Der Entwurf zeigt:
+          Nutzung von 54&nbsp;% auf 71&nbsp;% der Lizenzen gestiegen, zwei von
+          drei Kickoff-Zielen erreicht und die Empfehlung, auf das
+          Finance-Team auszuweiten. Der CSM schreibt eine Folie um und
+          verschickt das Deck. Lighthouse Payroll hat die EBR-Vorbereitung so
+          von 6 Stunden auf 40 Minuten verkürzt.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li>
+          Decks im Template Ihrer Marke, exportiert nach Slides, PowerPoint oder PDF
+        </li>
+        <li>Ziele werden beim Kickoff erfasst und automatisch verfolgt</li>
+        <li>Ein empfohlener nächster Schritt in jedem Deck</li>
+        <li>Versionsverlauf, damit Sie dieses Quartal mit dem letzten vergleichen können</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>Integrationen</h2>
+    <p class="lede">
+      Harbor Desk liest aus den Systemen, die Sie schon nutzen, und schreibt
+      dorthin zurück, wo Ihr Team arbeitet. Salesforce, HubSpot, Zendesk,
+      Intercom, Segment, Snowflake, BigQuery und Slack sind in jedem Plan
+      enthalten. Ihr CRM bleibt das führende System.
+    </p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Churn kommen sehen. Vor der Verlängerung handeln.</h2>
+    <p>Wir zeigen Ihnen alle drei an Accounts, die aussehen wie Ihre.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/harbordesk/de-de/demo/">Demo buchen</a>
+      <a class="btn btn-on-dark" href="/harbordesk/de-de/demo/#talk-to-sales"
+        >Mit dem Vertrieb sprechen</a
+      >
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="/harbordesk/assets/logo-white.svg" alt="Harbor Desk Logo" class="footer-logo" width="143" height="30">
+        <p>Churn kommen sehen. Vor der Verlängerung handeln.</p>
+        <address>Harbor Desk, Inc.<br>220 Wharf Street<br>Portland, ME 04101<br>Vereinigte Staaten</address>
+      </div>
+      <nav aria-label="Produkt">
+        <h2>Produkt</h2>
+        <ul>
+          <li><a href="/harbordesk/de-de/product/">Produktüberblick</a></li>
+          <li><a href="/harbordesk/de-de/product/#health-scores">Health Scores</a></li>
+          <li><a href="/harbordesk/de-de/product/#playbooks">Playbooks</a></li>
+          <li><a href="/harbordesk/de-de/product/#ebr-builder">EBR Builder</a></li>
+          <li><a href="/harbordesk/de-de/pricing/">Preise</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Unternehmen">
+        <h2>Unternehmen</h2>
+        <ul>
+          <li><a href="/harbordesk/de-de/about/">Über uns</a></li>
+          <li><a href="/harbordesk/de-de/customers/">Kunden</a></li>
+          <li><a href="/harbordesk/de-de/resources/">Ressourcen</a></li>
+          <li><a href="/harbordesk/de-de/events/">Events</a></li>
+          <li><a href="/harbordesk/de-de/events/churn-risk-teardown-workshop/">Workshop „Churn-Risiko auf dem Prüfstand“</a></li>
+          <li><a href="/harbordesk/de-de/brand/">Marke und Presse</a></li>
+          <li><a href="/harbordesk/de-de/">Startseite</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Erste Schritte">
+        <h2>Erste Schritte</h2>
+        <ul>
+          <li><a href="/harbordesk/de-de/demo/">Demo buchen</a></li>
+          <li><a href="/harbordesk/de-de/demo/#talk-to-sales">Mit dem Vertrieb sprechen</a></li>
+          <li><a href="/harbordesk/de-de/privacy/">Datenschutzerklärung</a></li>
+          <li><a href="/harbordesk/de-de/terms/">Nutzungsbedingungen</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-base">
+      <span>&copy; 2026 Harbor Desk, Inc. Alle Rechte vorbehalten.</span>
+      <span>Harbor Desk ist ein fiktives Unternehmen für Produktdemos.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

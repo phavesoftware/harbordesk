@@ -67,6 +67,7 @@ p { margin: 0 0 16px; }
 .lang-picker li a:hover { background: var(--color-background); color: var(--color-primary); }
 .lang-picker li a[aria-current="true"] { background: var(--color-background); }
 .lang-picker li a[aria-current="true"]::after { content: ""; margin-left: auto; width: 5px; height: 10px; border-right: 2px solid var(--color-primary); border-bottom: 2px solid var(--color-primary); transform: rotate(45deg) translateY(-2px); }
+.dev-badge { margin-right: auto; padding: 3px 10px; border-radius: 999px; background: var(--color-accent); color: var(--color-ink); font-weight: 800; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
 .flag { display: block; width: 20px; height: 14px; object-fit: cover; border-radius: 2px; box-shadow: 0 0 0 1px var(--color-line); }
 
 /* Buttons */

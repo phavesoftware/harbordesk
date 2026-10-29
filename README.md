@@ -16,7 +16,9 @@ Everything here is invented. Harbor Desk is a customer success platform
   page list, titles and descriptions live at the top of this file.
 - `scripts/check.py`: checks the built pages (one h1, unique titles, meta
   and Open Graph tags, no broken internal links, every page links every main
-  page, no colors outside `:root`, US spelling, no avoided words).
+  page, no colors outside `:root`, US spelling on US pages and British on UK
+  pages, no foreign prices, each copy carries only its own tag, every
+  redirect lands on a page, no avoided words).
 - `scripts/logo.mjs`: generates the logo SVGs, PNGs, favicon and the
   1200x630 social card into `assets/` and the repo root.
 - `assets/site.css`: the one stylesheet. The palette and fonts are CSS
@@ -40,33 +42,59 @@ Manrope 800 and Inter 400 TTFs in `.tools/fonts/`), then
 
 ## Languages
 
-Every page exists in three languages, switched from the flag picker in the
-header (each page links to the same page in the others, with `hreflang`
-alternates and a sitemap entry per language):
+Every page exists in three languages, each under its own path, switched from
+the flag picker in the header (each page links to the same page in the
+others, with `hreflang` alternates and a sitemap entry per language):
 
 | Language | Path | Source |
 |---|---|---|
-| English (US) | `/harbordesk/` | `src/*.html`, the source of truth |
-| English (Canada) | `/harbordesk/en-ca/` | derived at build time by `scripts/en_ca.py` (Canadian spellings, prices in Canadian dollars); put a file in `src/en-ca/` to override a page |
-| Français (Canada) | `/harbordesk/fr-ca/` | `src/fr-ca/*.html`, titles and descriptions in `src/fr-ca/meta.json` |
+| English (US) | `/harbordesk/en-us/` | `src/*.html`, the source of truth |
+| English (UK) | `/harbordesk/en-gb/` | derived at build time by `scripts/en_gb.py` (British spellings, prices in pounds, workshop times in GMT); put a file in `src/en-gb/` to override a page |
+| Deutsch | `/harbordesk/de-de/` | `src/de-de/*.html`, titles and descriptions in `src/de-de/meta.json` |
 
-Edit a US page and the Canadian English page follows on the next build. The
-French page does not: update `src/fr-ca/` in the same change. Prices in
-Canadian dollars are one table in `en_ca.py` (`PRICES`); the French pages
-spell the same amounts. Links in a fragment written as `{{base}}/...` point
-at the page's own language; `{{base}}/assets/...` stays shared.
+Edit a US page and the British page follows on the next build. The German
+page does not: update `src/de-de/` in the same change (the translation brief
+is in `.tools/de-brief.md`). Prices in pounds are one table in `en_gb.py`
+(`PRICES`); the German pages spell the euro amounts themselves. Links in a
+fragment written as `{{base}}/...` point at the page's own language and
+variant; `{{base}}/assets/...` stays shared.
+
+`/harbordesk/` itself redirects to the visitor's language (German, British
+or US English by the browser's language list). The addresses the site had
+before the language paths (`/harbordesk/pricing/`, `/harbordesk/en-ca/...`,
+`/harbordesk/fr-ca/...`) are redirect pages to the US English page.
 
 The Phave form on the workshop page is the same form in every language, so
-it shows in English on the French page.
+it shows in English on the German page.
+
+## Staging and dev copies
+
+The build writes the whole site twice, identical but for the Phave site tag:
+
+| Copy | Path | Tag |
+|---|---|---|
+| Staging | `/harbordesk/<lang>/` | `STAGING_TAG` in `build.py`: the Harbor Desk subscription on staging |
+| Dev | `/harbordesk/dev/<lang>/` | `DEV_TAG` in `build.py`: served by a developer's local Phave (`http://…localhost:…/bambino.js`) |
+
+The dev pages carry a "Dev" badge beside the logo, `noindex`, a canonical
+pointing at the staging page, and stay out of the sitemap. Chrome loads an
+`http://localhost` script on an https page (localhost counts as secure), and
+may ask once to allow access to devices on the local network. To point the
+dev copy at another local subscription, replace `DEV_TAG` with the snippet
+from that Phave's Settings → Web → Write keys (allowed origin
+`https://phavesoftware.github.io`) and rebuild.
 
 ## Phave wiring
 
 - Subscription: **Harbor Desk** on staging (`stage.phave.dev`).
 - Site: Self-hosted, host `phavesoftware.github.io`.
-- The site tag is the last element in `<head>` on every page (`TAG` in
-  `build.py`). Its attributes identify the account: copy it exactly, and
+- The site tag is the last element in `<head>` on every page (`STAGING_TAG`
+  in `build.py`; the workshop fragment's form embed writes `{{tag}}` for its
+  second copy). Its attributes identify the account: copy it exactly, and
   rebuild if the key is rotated (Settings → Web → Write keys).
-- `/harbordesk/demo/` has a `#demo-form` card holding a plain HTML form. A
+- Page paths below are the US English ones; every language and the dev
+  copy have the same pages under their own prefix.
+- `/harbordesk/en-us/demo/` has a `#demo-form` card holding a plain HTML form. A
   content slot with selector `#demo-form` and insert mode "Replace
   children" swaps in a Phave form. The plain form's fields carry no `name`,
   so submitting it sends nothing; it only navigates to `/demo/thanks/`.

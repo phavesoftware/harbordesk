@@ -187,21 +187,21 @@ socialCard(
 socialCard(
   null,
   [
-    ["Voyez venir l’attrition.", WHITE],
-    ["Agissez avant le renouvellement.", ACCENT],
+    ["Churn kommen sehen.", WHITE],
+    ["Vor der Verlängerung handeln.", ACCENT],
   ],
-  "La plateforme de réussite client des équipes SaaS B2B.",
-  "assets/og-image-fr.png",
+  "Die Customer-Success-Plattform für B2B-SaaS-Teams.",
+  "assets/og-image-de.png",
 );
 socialCard(
-  "ATELIER GRATUIT EN DIRECT",
+  "KOSTENLOSER LIVE-WORKSHOP",
   [
-    ["Décortiquer le risque d’attrition", WHITE],
-    ["Repérez les comptes à risque", ACCENT],
-    ["pendant qu’il est encore temps.", ACCENT],
+    ["Churn-Risiko auf dem Prüfstand", WHITE],
+    ["Gefährdete Accounts erkennen,", ACCENT],
+    ["solange noch Zeit ist.", ACCENT],
   ],
-  "60 minutes sur Zoom · 8 entreprises par séance · nov. et déc. 2026",
-  "assets/og-workshop-fr.png",
+  "60 Minuten auf Zoom · 8 Unternehmen pro Termin · Nov. und Dez. 2026",
+  "assets/og-workshop-de.png",
 );
 
 console.log(
