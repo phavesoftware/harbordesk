@@ -48,6 +48,24 @@ DEV_TAG = (
 )
 
 
+# The Phave preferences block, on the dev copy's Email preferences page. The
+# head line must be the first element in <head>: it takes the email link code
+# out of the address before any other script can read it. Both snippets are
+# Phave's own, pasted exactly as given.
+PREF_HEAD = (
+    '<script>(function(){try{var h=location.hash,m=/(?:^#|&)phv-pref=([^&]*)/.exec(h);if(!m)return;'
+    'var c=decodeURIComponent(m[1]||"");if(c)sessionStorage.setItem("phv-pref",c);'
+    'var r=h.slice(1).split("&").filter(function(p){return p.indexOf("phv-pref=")!==0}).join("&");'
+    'history.replaceState(history.state,"",location.pathname+location.search+(r?"#"+r:""))}catch(e){}})();</script>'
+)
+PREF_BLOCK = (
+    '<script async src="http://beacon.local-phave.localhost:3400/bambino.js" data-phv-tenant="acme" '
+    'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>\n'
+    '      <div data-phave-block="preferences"></div>'
+)
+PREF_BOX = '<div id="email-preferences-form" class="form-embed"></div>'
+
+
 @dataclass(frozen=True)
 class Variant:
     prefix: str  # "" for staging, "dev/" for the dev copy
@@ -431,7 +449,8 @@ def head(page: Page, lang: Lang) -> str:
     robots = "" if page.index and _variant.public else '\n  <meta name="robots" content="noindex">'
     og_locale = lang.code.replace("-", "_")
     others = "".join(f'\n  <meta property="og:locale:alternate" content="{l.code.replace("-", "_")}">' for l in LANGS if l is not lang)
-    return f"""<head>
+    first = f"\n  {PREF_HEAD}" if has_preferences_block(page) else ""
+    return f"""<head>{first}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
@@ -461,8 +480,14 @@ def head(page: Page, lang: Lang) -> str:
 </head>"""
 
 
+def has_preferences_block(page: Page) -> bool:
+    return page.path == "email-preferences/" and not _variant.public
+
+
 def render(page: Page, lang: Lang) -> str:
     body = localize_links(fragment(page, lang), lang).replace("{{tag}}", _variant.tag)
+    if has_preferences_block(page):
+        body = body.replace(PREF_BOX, PREF_BOX.replace("></div>", f">\n      {PREF_BLOCK}\n    </div>"))
     h1_count = len(re.findall(r"<h1[\s>]", body))
     if h1_count != 1:
         raise SystemExit(f"{lang.prefix}{page.source}: expected one <h1>, found {h1_count}")

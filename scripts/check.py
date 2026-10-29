@@ -115,8 +115,16 @@ def check_page(rel: Path, html: str) -> None:
         problems.append(f"{rel}: needs exactly one <h1>")
     # The form embed carries its own copy of the tag beside the form.
     expected_tags = 2 if 'data-phave-form="' in html else 1
-    if html.count(variant.tag) != expected_tags or html.count("bambino.js") != expected_tags:
+    # The preferences block brings its own copy of the tag, as Phave wrote it.
+    block = 'data-phave-block="preferences"' in html
+    if html.count(variant.tag) != expected_tags or html.count("bambino.js") != expected_tags + block:
         problems.append(f"{rel}: its variant's Phave tag must appear {expected_tags} time(s), and no other tag")
+    if block != (rel.parts[0] == "dev" and "email-preferences" in rel.parts):
+        problems.append(f"{rel}: the preferences block belongs on the dev Email preferences pages only")
+    if block and not html.startswith(f"<!doctype html>\n<html lang=\"{lang}\">\n<head>\n  {build.PREF_HEAD}\n"):
+        problems.append(f"{rel}: the preferences head line must be the first element in <head>")
+    if block and build.PREF_BLOCK not in html:
+        problems.append(f"{rel}: preferences block snippet changed")
     if "{{" in html:
         problems.append(f"{rel}: unfilled placeholder")
     if not variant.public:
