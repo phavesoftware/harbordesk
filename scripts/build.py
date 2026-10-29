@@ -48,22 +48,29 @@ DEV_TAG = (
 )
 
 
-# The Phave preferences block, on the dev copy's Email preferences page. The
-# head line must be the first element in <head>: it takes the email link code
-# out of the address before any other script can read it. Both snippets are
-# Phave's own, pasted exactly as given.
+# The Phave email blocks, on the dev copy's Email preferences and Unsubscribe
+# pages. The head line must be the first element in <head>: it takes the
+# email link code out of the address before any other script can read it.
+# The snippets are Phave's own, pasted exactly as given.
 PREF_HEAD = (
     '<script>(function(){try{var h=location.hash,m=/(?:^#|&)phv-pref=([^&]*)/.exec(h);if(!m)return;'
     'var c=decodeURIComponent(m[1]||"");if(c)sessionStorage.setItem("phv-pref",c);'
     'var r=h.slice(1).split("&").filter(function(p){return p.indexOf("phv-pref=")!==0}).join("&");'
     'history.replaceState(history.state,"",location.pathname+location.search+(r?"#"+r:""))}catch(e){}})();</script>'
 )
-PREF_BLOCK = (
+BLOCK_TAG = (
     '<script async src="http://beacon.local-phave.localhost:3400/bambino.js" data-phv-tenant="acme" '
-    'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>\n'
-    '      <div data-phave-block="preferences"></div>'
+    'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>'
 )
-PREF_BOX = '<div id="email-preferences-form" class="form-embed"></div>'
+# Page path -> (the page's embed box, the Phave block drawn inside it).
+EMAIL_BLOCKS = {
+    "email-preferences/": ('<div id="email-preferences-form" class="form-embed"></div>', "preferences"),
+    "unsubscribe/": ('<div id="unsubscribe-form" class="form-embed"></div>', "unsubscribe"),
+}
+
+
+def block_snippet(name: str) -> str:
+    return f'{BLOCK_TAG}\n      <div data-phave-block="{name}"></div>'
 
 
 @dataclass(frozen=True)
@@ -449,7 +456,7 @@ def head(page: Page, lang: Lang) -> str:
     robots = "" if page.index and _variant.public else '\n  <meta name="robots" content="noindex">'
     og_locale = lang.code.replace("-", "_")
     others = "".join(f'\n  <meta property="og:locale:alternate" content="{l.code.replace("-", "_")}">' for l in LANGS if l is not lang)
-    first = f"\n  {PREF_HEAD}" if has_preferences_block(page) else ""
+    first = f"\n  {PREF_HEAD}" if email_block(page) else ""
     return f"""<head>{first}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -480,14 +487,16 @@ def head(page: Page, lang: Lang) -> str:
 </head>"""
 
 
-def has_preferences_block(page: Page) -> bool:
-    return page.path == "email-preferences/" and not _variant.public
+def email_block(page: Page) -> tuple[str, str] | None:
+    """The page's (embed box, Phave block name), on the dev copy only."""
+    return None if _variant.public else EMAIL_BLOCKS.get(page.path)
 
 
 def render(page: Page, lang: Lang) -> str:
     body = localize_links(fragment(page, lang), lang).replace("{{tag}}", _variant.tag)
-    if has_preferences_block(page):
-        body = body.replace(PREF_BOX, PREF_BOX.replace("></div>", f">\n      {PREF_BLOCK}\n    </div>"))
+    if block := email_block(page):
+        box, name = block
+        body = body.replace(box, box.replace("></div>", f">\n      {block_snippet(name)}\n    </div>"))
     h1_count = len(re.findall(r"<h1[\s>]", body))
     if h1_count != 1:
         raise SystemExit(f"{lang.prefix}{page.source}: expected one <h1>, found {h1_count}")

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="de-DE">
 <head>
+  <script>(function(){try{var h=location.hash,m=/(?:^#|&)phv-pref=([^&]*)/.exec(h);if(!m)return;var c=decodeURIComponent(m[1]||"");if(c)sessionStorage.setItem("phv-pref",c);var r=h.slice(1).split("&").filter(function(p){return p.indexOf("phv-pref=")!==0}).join("&");history.replaceState(history.state,"",location.pathname+location.search+(r?"#"+r:""))}catch(e){}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E-Mails von Harbor Desk abbestellen · Harbor Desk</title>
@@ -74,7 +75,10 @@
       <a href="/harbordesk/dev/de-de/email-preferences/">passen Sie stattdessen Ihre E-Mail-Einstellungen an</a>.
     </p>
     <!-- PHAVE FORM EMBED CODE GOES HERE -->
-    <div id="unsubscribe-form" class="form-embed"></div>
+    <div id="unsubscribe-form" class="form-embed">
+      <script async src="http://beacon.local-phave.localhost:3400/bambino.js" data-phv-tenant="acme" data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>
+      <div data-phave-block="unsubscribe"></div>
+    </div>
     <p class="meta">
       E-Mails zu einem bestehenden Vorgang, etwa einer gebuchten Demo, können
       wir Ihnen weiterhin senden. Mehr dazu in unserer

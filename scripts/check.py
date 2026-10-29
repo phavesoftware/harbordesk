@@ -115,16 +115,19 @@ def check_page(rel: Path, html: str) -> None:
         problems.append(f"{rel}: needs exactly one <h1>")
     # The form embed carries its own copy of the tag beside the form.
     expected_tags = 2 if 'data-phave-form="' in html else 1
-    # The preferences block brings its own copy of the tag, as Phave wrote it.
-    block = 'data-phave-block="preferences"' in html
+    # An email block brings its own copy of the tag, as Phave wrote it.
+    found = re.findall(r'data-phave-block="([^"]+)"', html)
+    page_path = "/".join(rel.parts[2 if variant_prefix else 1:-1]) + "/"
+    wanted = build.EMAIL_BLOCKS.get(page_path) if not variant.public else None
+    block = bool(found)
     if html.count(variant.tag) != expected_tags or html.count("bambino.js") != expected_tags + block:
         problems.append(f"{rel}: its variant's Phave tag must appear {expected_tags} time(s), and no other tag")
-    if block != (rel.parts[0] == "dev" and "email-preferences" in rel.parts):
-        problems.append(f"{rel}: the preferences block belongs on the dev Email preferences pages only")
+    if found != ([wanted[1]] if wanted else []):
+        problems.append(f"{rel}: email blocks {found}, expected {wanted[1] if wanted else 'none'}")
     if block and not html.startswith(f"<!doctype html>\n<html lang=\"{lang}\">\n<head>\n  {build.PREF_HEAD}\n"):
-        problems.append(f"{rel}: the preferences head line must be the first element in <head>")
-    if block and build.PREF_BLOCK not in html:
-        problems.append(f"{rel}: preferences block snippet changed")
+        problems.append(f"{rel}: the email link head line must be the first element in <head>")
+    if wanted and build.block_snippet(wanted[1]) not in html:
+        problems.append(f"{rel}: {wanted[1]} block snippet changed")
     if "{{" in html:
         problems.append(f"{rel}: unfilled placeholder")
     if not variant.public:

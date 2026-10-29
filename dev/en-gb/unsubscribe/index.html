@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
+  <script>(function(){try{var h=location.hash,m=/(?:^#|&)phv-pref=([^&]*)/.exec(h);if(!m)return;var c=decodeURIComponent(m[1]||"");if(c)sessionStorage.setItem("phv-pref",c);var r=h.slice(1).split("&").filter(function(p){return p.indexOf("phv-pref=")!==0}).join("&");history.replaceState(history.state,"",location.pathname+location.search+(r?"#"+r:""))}catch(e){}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Unsubscribe from Harbor Desk email · Harbor Desk</title>
@@ -74,7 +75,10 @@
       instead.
     </p>
     <!-- PHAVE FORM EMBED CODE GOES HERE -->
-    <div id="unsubscribe-form" class="form-embed"></div>
+    <div id="unsubscribe-form" class="form-embed">
+      <script async src="http://beacon.local-phave.localhost:3400/bambino.js" data-phv-tenant="acme" data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>
+      <div data-phave-block="unsubscribe"></div>
+    </div>
     <p class="meta">
       We may still email you about an account you have with us, such as a
       demo you booked. See our <a href="/harbordesk/dev/en-gb/privacy/">privacy policy</a>.
