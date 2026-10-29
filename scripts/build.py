@@ -103,7 +103,8 @@ CHROME_EN = {
                     ("events/", "Events"), ("events/churn-risk-teardown-workshop/", "Churn-risk teardown workshop"),
                     ("brand/", "Brand and press"), ("", "Home")],
         "Get started": [("demo/", "Book a demo"), ("demo/#talk-to-sales", "Talk to sales"),
-                        ("privacy/", "Privacy policy"), ("terms/", "Terms of use")],
+                        ("privacy/", "Privacy policy"), ("terms/", "Terms of use"),
+                        ("email-preferences/", "Email preferences")],
     },
     "rights": "&copy; 2026 Harbor Desk, Inc. All rights reserved.",
     "fictional": "Harbor Desk is a fictional company used for product demos.",
@@ -129,7 +130,8 @@ CHROME_DE = {
                         ("events/churn-risk-teardown-workshop/", "Workshop „Churn-Risiko auf dem Prüfstand“"),
                         ("brand/", "Marke und Presse"), ("", "Startseite")],
         "Erste Schritte": [("demo/", "Demo buchen"), ("demo/#talk-to-sales", "Mit dem Vertrieb sprechen"),
-                           ("privacy/", "Datenschutzerklärung"), ("terms/", "Nutzungsbedingungen")],
+                           ("privacy/", "Datenschutzerklärung"), ("terms/", "Nutzungsbedingungen"),
+                           ("email-preferences/", "E-Mail-Einstellungen")],
     },
     "rights": "&copy; 2026 Harbor Desk, Inc. Alle Rechte vorbehalten.",
     "fictional": "Harbor Desk ist ein fiktives Unternehmen für Produktdemos.",
@@ -251,6 +253,12 @@ PAGES = [
          "How Harbor Desk collects, uses and protects information about visitors to this website, the cookies it sets, and how to opt out.", None),
     Page("terms/", "terms.html", "Terms of use · Harbor Desk",
          "The terms that govern use of the Harbor Desk website.", None),
+    # Reached from links in email; the Phave form embeds go in each page's box.
+    Page("email-preferences/", "email-preferences.html", "Email preferences · Harbor Desk",
+         "Choose which Harbor Desk emails you get: product news, blog posts and workshop invitations.", None,
+         index=False),
+    Page("unsubscribe/", "unsubscribe.html", "Unsubscribe from Harbor Desk email · Harbor Desk",
+         "Stop receiving marketing email from Harbor Desk.", None, index=False),
 ]
 
 HEADER_NAV = ["product", "customers", "pricing", "resources", "events", "about"]
