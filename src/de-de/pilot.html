@@ -1,0 +1,69 @@
+<section class="hero hero-harbor">
+  <div class="wrap grid-2">
+    <div>
+      <p class="tagline">30-tägige Pilotphase</p>
+      <h1>Testen Sie Harbor Desk 30 Tage mit Ihren eigenen Accounts.</h1>
+      <p>
+        Eine Demo zeigt Ihnen einen Beispielbestand. Eine Pilotphase zeigt Ihnen
+        Ihren eigenen: Ihre Verlängerungen, Ihre Nutzungsdaten, Ihre gefährdeten
+        Accounts, bewertet bis zum Ende der ersten Woche.
+      </p>
+      <ul class="event-facts">
+        <li>30 Tage mit Growth oder Enterprise</li>
+        <li>Ihre CRM- und Produktdaten</li>
+        <li>Gebühr wird auf das erste Jahr angerechnet</li>
+      </ul>
+    </div>
+    <div class="form-card pilot-card">
+      <h2>Pilotphase starten</h2>
+      <p class="form-intro">Wählen Sie den Plan, den Sie testen möchten.</p>
+      <div class="plan-picker" role="group" aria-label="Plan">
+        <button type="button" class="plan" data-hd-set="{{field:pilot_plan}}" data-hd-value="Growth" data-hd-into="#pilot-form" aria-pressed="true">
+          <strong>Growth</strong><span>25 CSM-Lizenzen</span>
+        </button>
+        <button type="button" class="plan" data-hd-set="{{field:pilot_plan}}" data-hd-value="Enterprise" data-hd-into="#pilot-form" aria-pressed="false">
+          <strong>Enterprise</strong><span>50 CSM-Lizenzen</span>
+        </button>
+      </div>
+      <div id="pilot-form" class="pilot-form" data-hd-load="{{form:pilot}}" data-hd-work-email="{{field:pilot_email}}">
+        <p class="form-note">Das Formular wird geladen…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow">
+    <p class="eyebrow">So läuft eine Pilotphase</p>
+    <h2>Vier Wochen, eine Frage: Sieht Harbor Desk den Churn in Ihrem Bestand kommen?</h2>
+    <ol class="agenda">
+      <li>
+        <h3>Woche 1: verbinden und bewerten</h3>
+        <p>
+          Wir verbinden Ihr CRM und eine Produktdatenquelle und testen einen
+          Health Score rückwirkend an den Verlängerungen der letzten vier Quartale.
+        </p>
+      </li>
+      <li>
+        <h3>Wochen 2 und 3: handeln</h3>
+        <p>
+          Ihre CSMs arbeiten mit dem Score, und zwei Playbooks laufen auf den
+          Accounts, die gelb werden: Nutzungsrückgang und Sponsorwechsel.
+        </p>
+      </li>
+      <li>
+        <h3>Woche 4: entscheiden</h3>
+        <p>
+          Wir prüfen, welche Accounts der Score markiert hat und was Ihr Team
+          daraufhin getan hat. Sie entscheiden über den Plan, und die
+          Pilotgebühr wird vom ersten Jahr abgezogen.
+        </p>
+      </li>
+    </ol>
+    <p>
+      Noch nicht bereit für Ihre eigenen Daten? <a href="{{base}}/demo/">Demo buchen</a>
+      mit einem Beispielbestand, oder sehen Sie sich die <a href="{{base}}/pricing/">Preise</a> an.
+    </p>
+  </div>
+</section>
+<script src="{{base}}/assets/forms.js" defer></script>
