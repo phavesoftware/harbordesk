@@ -82,7 +82,17 @@ def block_snippet(name: str) -> str:
 FORM_NAMES = ("contact", "pilot", "asset", "tour", "newsletter", "case_study")
 FIELD_NAMES = ("pilot_plan", "pilot_email", "asset_name")
 STAGING_FORMS: dict[str, str] = {name: "" for name in FORM_NAMES + FIELD_NAMES}
-DEV_FORMS: dict[str, str] = {name: "" for name in FORM_NAMES + FIELD_NAMES}
+DEV_FORMS: dict[str, str] = {
+    "contact": "f12ipv160o33xg4",
+    "pilot": "f192cema0d70ni4",
+    "asset": "f1amu4jl08f9dj9",
+    "tour": "f0xymbuk18hnaei",
+    "newsletter": "f10eyop010cakmb",
+    "case_study": "f0dpjfdh1ovcf9k",
+    "pilot_plan": "aaac4266-96f5-425a-9918-f2fa213e1e9f",
+    "pilot_email": "2dc1e402-713a-4feb-b50f-85be57d28c11",
+    "asset_name": "48c44e0a-e2dc-44e2-8e72-2e477ac051dc",
+}
 
 
 @dataclass(frozen=True)
