@@ -207,6 +207,42 @@ tr:last-child td { border-bottom: 0; }
 .promo p { color: var(--color-line); margin: 0; }
 .promo .eyebrow { color: var(--color-accent); margin-bottom: 6px; }
 
+/* Phave form test pages: contact, pilot, templates, case study */
+.form-intro { color: var(--color-neutral); font-size: 15px; margin: 0 0 18px; }
+.form-unset { border: 1px dashed var(--color-line); border-radius: 10px; padding: 14px 16px; margin: 0; }
+.hero-harbor { background:
+  radial-gradient(circle at 85% 20%, color-mix(in srgb, var(--color-accent) 35%, transparent) 0, transparent 45%),
+  linear-gradient(160deg, var(--color-ink) 40%, color-mix(in srgb, var(--color-primary) 70%, var(--color-ink)) 100%); }
+.hero .form-card { color: var(--color-ink); }
+.hero .form-card h2 { color: var(--color-ink); }
+.hero .form-card p { color: var(--color-neutral); font-size: 15px; }
+.plan-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.plan { font: inherit; text-align: left; cursor: pointer; background: var(--color-surface); color: var(--color-ink); border: 1.5px solid var(--color-line); border-radius: 12px; padding: 12px 14px; min-height: 44px; }
+.plan strong { display: block; font-family: var(--font-heading); }
+.plan span { color: var(--color-neutral); font-size: 14px; }
+.plan[aria-pressed="true"] { border-color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)); }
+.plan:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.grid-3 { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.asset { display: flex; flex-direction: column; }
+.asset p:last-of-type { flex: 1; }
+.asset .btn { align-self: flex-start; }
+.tour { background: var(--color-ink); border-radius: var(--radius); padding: 16px; display: grid; gap: 12px; }
+.tour-screen { aspect-ratio: 16 / 9; border-radius: 10px; background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 60%, var(--color-ink)), var(--color-ink)); display: flex; align-items: flex-end; justify-content: flex-end; padding: 12px; }
+.tour-time { color: var(--color-surface); font-size: 13px; font-variant-numeric: tabular-nums; }
+.tour-bar { height: 6px; border-radius: 999px; background: color-mix(in srgb, var(--color-line) 30%, transparent); overflow: hidden; }
+.tour-progress { display: block; height: 100%; width: 0; background: var(--color-accent); transition: width 0.4s linear; }
+.tour-play { justify-self: start; }
+.newsletter { background: var(--color-background); border-top: 1px solid var(--color-line); }
+.newsletter-form { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius); padding: 24px; min-height: 120px; }
+.download-ready { margin-top: 20px; background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)); border: 1px solid var(--color-primary); border-radius: var(--radius); padding: 14px 18px; }
+.download-ready p { margin: 0; }
+.case-stats { list-style: none; padding: 0; margin: 0; align-content: center; }
+.form-log { position: fixed; right: 16px; bottom: 16px; z-index: 1000; width: min(420px, calc(100vw - 32px)); max-height: 40vh; overflow: auto; background: var(--color-ink); color: var(--color-surface); border-radius: 12px; padding: 12px 14px; font: 12px/1.5 ui-monospace, Menlo, monospace; box-shadow: var(--shadow); }
+.form-log h2 { color: var(--color-accent); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 6px; }
+.form-log ol { list-style: none; margin: 0; padding: 0; }
+.form-log li { border-top: 1px solid color-mix(in srgb, var(--color-line) 20%, transparent); padding: 4px 0; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .tour-progress { transition: none; } }
+
 /* CTA band */
 .cta-band { background: var(--color-ink); color: var(--color-surface); padding: 64px 0; text-align: center; }
 .cta-band h2 { color: var(--color-surface); }

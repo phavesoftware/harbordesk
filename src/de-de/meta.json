@@ -89,6 +89,26 @@
     "description": "Legen Sie fest, welche E-Mails Sie von Harbor Desk erhalten: Produktneuigkeiten, Blogartikel und Einladungen zu Workshops.",
     "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
   },
+  "contact/": {
+    "title": "Kontakt zu Harbor Desk: Vertrieb, Support und Partnerschaften",
+    "description": "Schreiben Sie dem Harbor-Desk-Team zu Preisen, einer Demo, Ihrem Konto oder einer Partnerschaft. Das Team in Ihrer Zeitzone antwortet innerhalb eines Werktags.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "pilot/": {
+    "title": "30-tägige Pilotphase mit Ihren eigenen Accounts · Harbor Desk",
+    "description": "Testen Sie Harbor Desk 30 Tage lang mit Ihren eigenen Verlängerungen und Nutzungsdaten, im Plan Growth oder Enterprise. Die Pilotgebühr wird auf Ihr erstes Jahr angerechnet.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "resources/templates/": {
+    "title": "Vorlagen und Leitfäden für Customer-Success-Teams · Harbor Desk",
+    "description": "Kostenlose Vorlagen für Customer-Success-Teams: eine EBR-Präsentation, ein Health-Score-Arbeitsblatt und ein Playbook-Paket für Verlängerungsrisiken.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
+  "customers/tidewater-freight/": {
+    "title": "Fallstudie: Tidewater Freight senkt den Churn um 18 % · Harbor Desk",
+    "description": "Wie Tidewater Freight mit einem neu aufgebauten Health Score und drei Playbooks den Brutto-Churn in 12 Monaten um 18 % gesenkt und Risiken etwa 70 Tage früher erkannt hat.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
   "unsubscribe/": {
     "title": "E-Mails von Harbor Desk abbestellen · Harbor Desk",
     "description": "Keine Marketing-E-Mails mehr von Harbor Desk erhalten.",

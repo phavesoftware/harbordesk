@@ -73,15 +73,28 @@ def block_snippet(name: str) -> str:
     return f'{BLOCK_TAG}\n      <div data-phave-block="{name}"></div>'
 
 
+# The Phave forms on the contact, pilot, library and case study pages, per
+# copy, because each copy talks to its own subscription. A form is named by
+# the code in its embed line (Form tactic > Host my form > Embed code for,
+# the value of data-phave-form); a field by its Field id (the field's
+# settings in the form editor). "" until the form exists there: the page
+# then says the form is not connected and its buttons do nothing.
+FORM_NAMES = ("contact", "pilot", "asset", "tour", "newsletter", "case_study")
+FIELD_NAMES = ("pilot_plan", "pilot_email", "asset_name")
+STAGING_FORMS: dict[str, str] = {name: "" for name in FORM_NAMES + FIELD_NAMES}
+DEV_FORMS: dict[str, str] = {name: "" for name in FORM_NAMES + FIELD_NAMES}
+
+
 @dataclass(frozen=True)
 class Variant:
     prefix: str  # "" for staging, "dev/" for the dev copy
     tag: str
     public: bool  # indexed and in the sitemap
+    forms: dict[str, str]  # FORM_NAMES and FIELD_NAMES to this copy's values
 
 
-STAGING = Variant("", STAGING_TAG, True)
-DEV = Variant("dev/", DEV_TAG, False)
+STAGING = Variant("", STAGING_TAG, True, STAGING_FORMS)
+DEV = Variant("dev/", DEV_TAG, False, DEV_FORMS)
 VARIANTS = [STAGING, DEV]
 
 
@@ -128,6 +141,8 @@ CHROME_EN = {
                     ("events/", "Events"), ("events/churn-risk-teardown-workshop/", "Churn-risk teardown workshop"),
                     ("brand/", "Brand and press"), ("", "Home")],
         "Get started": [("demo/", "Book a demo"), ("demo/#talk-to-sales", "Talk to sales"),
+                        ("contact/", "Contact us"), ("pilot/", "Start a pilot"),
+                        ("resources/templates/", "Templates and guides"),
                         ("privacy/", "Privacy policy"), ("terms/", "Terms of use"),
                         ("email-preferences/", "Email preferences")],
     },
@@ -155,6 +170,8 @@ CHROME_DE = {
                         ("events/churn-risk-teardown-workshop/", "Workshop „Churn-Risiko auf dem Prüfstand“"),
                         ("brand/", "Marke und Presse"), ("", "Startseite")],
         "Erste Schritte": [("demo/", "Demo buchen"), ("demo/#talk-to-sales", "Mit dem Vertrieb sprechen"),
+                           ("contact/", "Kontakt"), ("pilot/", "Pilotphase starten"),
+                           ("resources/templates/", "Vorlagen und Leitfäden"),
                            ("privacy/", "Datenschutzerklärung"), ("terms/", "Nutzungsbedingungen"),
                            ("email-preferences/", "E-Mail-Einstellungen")],
     },
@@ -272,6 +289,15 @@ PAGES = [
          "You're registered for the Harbor Desk Churn-risk teardown workshop. Look out for a calendar invite and a short pre-work email.",
          "events", og_image="og-workshop",
          og_alt="Harbor Desk logo with the title: Churn-risk teardown workshop.", index=False),
+    Page("contact/", "contact.html", "Contact Harbor Desk: sales, support and partnerships",
+         "Talk to Harbor Desk about pricing, a demo, your account or a partnership. Tell us where you are and the team in your time zone replies within one business day.", None),
+    Page("pilot/", "pilot.html", "Start a 30-day pilot on your own accounts · Harbor Desk",
+         "Run Harbor Desk on your own book of accounts for 30 days on Growth or Enterprise, with the pilot fee credited against your first year.", "pricing"),
+    Page("resources/templates/", "templates.html", "Templates and guides for customer success teams · Harbor Desk",
+         "Free templates from Harbor Desk: an EBR deck, a health score worksheet and a renewal risk playbook kit, plus a three-minute product tour.", "resources"),
+    Page("customers/tidewater-freight/", "case-tidewater.html",
+         "Case study: how Tidewater Freight cut gross churn 18% · Harbor Desk",
+         "How Tidewater Freight rebuilt its health score around four signals, launched three Playbooks, and cut gross churn 18% in 12 months.", "customers", "article"),
     Page("brand/", "brand.html", "Brand and press kit · Harbor Desk",
          "Harbor Desk logo files, color palette with hex values, fonts, and the rules for how we write: tone, words we avoid and product name capitalization.", None),
     Page("privacy/", "privacy.html", "Privacy policy · Harbor Desk",
@@ -492,8 +518,38 @@ def email_block(page: Page) -> tuple[str, str] | None:
     return None if _variant.public else EMAIL_BLOCKS.get(page.path)
 
 
+FORM_KEY = re.compile(r"^[a-z0-9_]*$")
+UNCONNECTED = '<p class="form-note form-unset">This form is not connected yet.</p>'
+
+
+def form_value(name: str) -> str:
+    if name not in _variant.forms:
+        raise SystemExit(f"unknown form or field {name!r}: add it to FORM_NAMES or FIELD_NAMES")
+    value = _variant.forms[name]
+    if name in FORM_NAMES and not FORM_KEY.match(value):
+        raise SystemExit(f"{_variant.prefix or 'staging'} form {name!r}: {value!r} is not an embed code")
+    return value
+
+
+def fill_forms(body: str) -> str:
+    """{{embed:x}} is the embed line (the tag beside the form, as Phave
+    writes it), {{open:x}} the pop-up trigger attribute, {{form:x}} and
+    {{field:x}} the bare values the page script reads."""
+    def embed(m: re.Match[str]) -> str:
+        key = form_value(m.group(1))
+        return f'{{{{tag}}}}\n        <div data-phave-form="{key}"></div>' if key else UNCONNECTED
+
+    def opener(m: re.Match[str]) -> str:
+        key = form_value(m.group(1))
+        return f' data-phave-form-open="{key}"' if key else ""
+
+    body = re.sub(r"\{\{embed:([a-z_]+)\}\}", embed, body)
+    body = re.sub(r" ?\{\{open:([a-z_]+)\}\}", opener, body)
+    return re.sub(r"\{\{(?:form|field):([a-z_]+)\}\}", lambda m: escape(form_value(m.group(1))), body)
+
+
 def render(page: Page, lang: Lang) -> str:
-    body = localize_links(fragment(page, lang), lang).replace("{{tag}}", _variant.tag)
+    body = fill_forms(localize_links(fragment(page, lang), lang)).replace("{{tag}}", _variant.tag)
     if block := email_block(page):
         box, name = block
         body = body.replace(box, box.replace("></div>", f">\n      {block_snippet(name)}\n    </div>"))

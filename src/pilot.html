@@ -1,0 +1,69 @@
+<section class="hero hero-harbor">
+  <div class="wrap grid-2">
+    <div>
+      <p class="tagline">30-day pilot</p>
+      <h1>Run Harbor Desk on your own accounts for 30 days.</h1>
+      <p>
+        A demo shows you a sample book. A pilot shows you your own: your
+        renewals, your usage data, your at-risk accounts, scored by the end of
+        the first week.
+      </p>
+      <ul class="event-facts">
+        <li>30 days on Growth or Enterprise</li>
+        <li>Your CRM and product data</li>
+        <li>Fee credited against your first year</li>
+      </ul>
+    </div>
+    <div class="form-card pilot-card">
+      <h2>Start your pilot</h2>
+      <p class="form-intro">Pick the plan you want to try.</p>
+      <div class="plan-picker" role="group" aria-label="Plan">
+        <button type="button" class="plan" data-hd-set="{{field:pilot_plan}}" data-hd-value="Growth" data-hd-into="#pilot-form" aria-pressed="true">
+          <strong>Growth</strong><span>25 CSM seats</span>
+        </button>
+        <button type="button" class="plan" data-hd-set="{{field:pilot_plan}}" data-hd-value="Enterprise" data-hd-into="#pilot-form" aria-pressed="false">
+          <strong>Enterprise</strong><span>50 CSM seats</span>
+        </button>
+      </div>
+      <div id="pilot-form" class="pilot-form" data-hd-load="{{form:pilot}}" data-hd-work-email="{{field:pilot_email}}">
+        <p class="form-note">Loading the form…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow">
+    <p class="eyebrow">How a pilot runs</p>
+    <h2>Four weeks, one question: does it see churn coming on your book?</h2>
+    <ol class="agenda">
+      <li>
+        <h3>Week 1: connect and score</h3>
+        <p>
+          We connect your CRM and one product data source, then back-test a
+          health score against your last four quarters of renewals.
+        </p>
+      </li>
+      <li>
+        <h3>Weeks 2 and 3: act on it</h3>
+        <p>
+          Your CSMs work from the score, and two Playbooks run on the accounts
+          that turn amber: a usage drop and a sponsor change.
+        </p>
+      </li>
+      <li>
+        <h3>Week 4: decide</h3>
+        <p>
+          We review which accounts the score flagged and what your team did
+          about them. You decide on the plan, and the pilot fee comes off your
+          first year.
+        </p>
+      </li>
+    </ol>
+    <p>
+      Not ready for your own data yet? <a href="{{base}}/demo/">Book a demo</a>
+      on a sample book, or see <a href="{{base}}/pricing/">pricing</a>.
+    </p>
+  </div>
+</section>
+<script src="{{base}}/assets/forms.js" defer></script>
