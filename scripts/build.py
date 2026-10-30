@@ -41,7 +41,7 @@ STAGING_TAG = (
 # Served by the developer's local Phave (Settings > Web > Write keys there).
 # Chrome lets an https page load it because localhost counts as secure.
 DEV_TAG = (
-    '<script async src="http://beacon.local-phave.localhost:3400/bambino.js" '
+    '<script async src="http://beacon.local-phave.localhost:3000/bambino.js" '
     'data-phv-tenant="acme" '
     'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ" '
     'data-phv-consent="opt_out"></script>'
@@ -59,7 +59,7 @@ PREF_HEAD = (
     'history.replaceState(history.state,"",location.pathname+location.search+(r?"#"+r:""))}catch(e){}})();</script>'
 )
 BLOCK_TAG = (
-    '<script async src="http://beacon.local-phave.localhost:3400/bambino.js" data-phv-tenant="acme" '
+    '<script async src="http://beacon.local-phave.localhost:3000/bambino.js" data-phv-tenant="acme" '
     'data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ"></script>'
 )
 # Page path -> (the page's embed box, the Phave block drawn inside it).
