@@ -81,7 +81,17 @@ def block_snippet(name: str) -> str:
 # then says the form is not connected and its buttons do nothing.
 FORM_NAMES = ("contact", "pilot", "asset", "tour", "newsletter", "case_study")
 FIELD_NAMES = ("pilot_plan", "pilot_email", "asset_name")
-STAGING_FORMS: dict[str, str] = {name: "" for name in FORM_NAMES + FIELD_NAMES}
+STAGING_FORMS: dict[str, str] = {
+    "contact": "f1wtapw204a0aof",
+    "pilot": "f14oz2901chyev7",
+    "asset": "f02ilxgt1a4xrxl",
+    "tour": "f1i6h63w0g61lzd",
+    "newsletter": "f1hwm04w0anf4w8",
+    "case_study": "f14ueqf61juv1an",
+    "pilot_plan": "2f11a45a-6a2c-49b8-b9a3-b41a1f587f90",
+    "pilot_email": "51556d3a-b063-4833-a96e-43596a4d42b7",
+    "asset_name": "74fb633c-c197-4203-9517-b19392a06cbc",
+}
 DEV_FORMS: dict[str, str] = {
     "contact": "f12ipv160o33xg4",
     "pilot": "f192cema0d70ni4",
