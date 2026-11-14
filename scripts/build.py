@@ -31,7 +31,7 @@ SRC = ROOT / "src"
 BASE = "/harbordesk"
 ORIGIN = "https://phavesoftware.github.io"
 SITE_NAME = "Harbor Desk"
-LASTMOD = "2026-10-29"
+LASTMOD = "2026-11-13"
 STAGING_TAG = (
     '<script async src="https://harbor-desk.phvtrack.dev/bambino.js" '
     'data-phv-tenant="harbor-desk" '
@@ -330,6 +330,12 @@ PAGES = [
          index=False),
     Page("unsubscribe/", "unsubscribe.html", "Unsubscribe from Harbor Desk email · Harbor Desk",
          "Stop receiving marketing email from Harbor Desk.", None, index=False),
+    # Linked from email preferences (PTC-style Update Personal Information).
+    # Opened in the same tab after the preference link so the Phave form can
+    # prefill from the preference page code.
+    Page("manage-profile/", "manage-profile.html", "Manage my profile · Harbor Desk",
+         "Update your name, company, job title, country, phone and email for Harbor Desk.", None,
+         index=False),
 ]
 
 HEADER_NAV = ["product", "customers", "pricing", "resources", "events", "about"]
