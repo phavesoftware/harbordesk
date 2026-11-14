@@ -114,6 +114,11 @@
     "description": "Keine Marketing-E-Mails mehr von Harbor Desk erhalten.",
     "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
   },
+  "manage-profile/": {
+    "title": "Mein Profil verwalten · Harbor Desk",
+    "description": "Aktualisieren Sie Name, Unternehmen, Position, Land, Telefon und E-Mail für Harbor Desk.",
+    "og_alt": "Harbor-Desk-Logo mit dem Satz: Churn kommen sehen. Vor der Verlängerung handeln."
+  },
   "_event": {
     "name": "Workshop „Churn-Risiko auf dem Prüfstand“",
     "description": "Eine 60-minütige Live-Arbeitssitzung für Customer-Success-Führungskräfte: wie Ihr Team Churn-Risiko heute erkennt, wo Accounts vor der Verlängerung durchrutschen und welche Kundengespräche früher stattfinden sollten."

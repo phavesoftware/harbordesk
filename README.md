@@ -109,6 +109,11 @@ from that Phave's Settings → Web → Write keys (allowed origin
   `build.py` (structured data) and in the two event fragments (visible text).
 - `/harbordesk/privacy/` has opt-out and allow buttons that call
   `window.__phv.consent(false | true)` (queued if the tag has not loaded).
+- `/harbordesk/en-us/manage-profile/` is the PTC-style **Manage my profile**
+  page: an empty `#manage-profile-form` box for a Phave form (name, company,
+  job title, country, phone, email). Linked from email preferences. Open it
+  in the same tab after the email's preference link so the form prefills
+  from the preference page code.
 
 ## Form test pages
 
