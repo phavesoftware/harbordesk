@@ -94,10 +94,11 @@ from that Phave's Settings → Web → Write keys (allowed origin
   rebuild if the key is rotated (Settings → Web → Write keys).
 - Page paths below are the US English ones; every language and the dev
   copy have the same pages under their own prefix.
-- `/harbordesk/en-us/demo/` has a `#demo-form` card holding a plain HTML form. A
-  content slot with selector `#demo-form` and insert mode "Replace
-  children" swaps in a Phave form. The plain form's fields carry no `name`,
-  so submitting it sends nothing; it only navigates to `/demo/thanks/`.
+- `/harbordesk/en-us/demo/` has a `#demo-form` card holding only its
+  heading. A content slot with selector `#demo-form` and insert mode
+  "Replace children" puts a Phave form there. The site has no inline
+  forms of its own: a page form would show until Phave's form loads and
+  then swap.
 - Every `<head>` carries `<!-- PHAVE SITE TAG GOES HERE -->` with the tag
   directly after it.
 - `/harbordesk/events/churn-risk-teardown-workshop/` has a `#reserve`
