@@ -161,6 +161,15 @@ rebuild:
 5. **newsletter**: email only, inline.
 6. **case_study**: a gated download for the PDF, opening as a pop-up.
 
+Two more pages test the embed codes themselves, on the dev copy only and
+linked from nowhere (plain `.html` files, so `build.py` and `check.py` leave
+them alone): `/harbordesk/dev/test/embed-codes.html` holds the site tag naming
+its form (`data-phv-embed`), the `forms.load` snippet, a line pasted before
+codes named the tag, and a form added after the page loaded;
+`/harbordesk/dev/test/embed-codes-csp.html` holds the first three under a
+security policy that allows scripts from the tag's host only, where the
+snippet's inline script is blocked.
+
 Three things to know while testing:
 
 - **Display rules arm on every page of the Site**, because a Site embed is
