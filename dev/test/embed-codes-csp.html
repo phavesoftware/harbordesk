@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="Content-Security-Policy" content="script-src http://beacon.local-phave.localhost:3000">
+  <title>Embed code test, strict policy · Harbor Desk dev</title>
+  <link rel="stylesheet" href="/harbordesk/assets/site.css">
+  <!-- PHAVE SITE TAG GOES HERE -->
+  <script async src="http://beacon.local-phave.localhost:3000/bambino.js" data-phv-tenant="acme" data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ" data-phv-consent="opt_out"></script>
+</head>
+<body>
+<main id="main" style="padding:2rem 1rem;max-width:760px;margin:0 auto">
+  <h1>Embed code test, strict policy</h1>
+  <p>The same codes under a security policy that allows scripts from the tag's host only, so inline scripts are blocked. Not linked from the site.</p>
+  <section id="case-tag" style="margin:1.5rem 0;padding:1rem;border:1px solid #ccd;border-radius:12px">
+    <h2>1. The site tag naming the form</h2>
+    <p>The two lines the panel gives when it has the Site's tag line: a copy of the tag with data-phv-embed, over the empty element of that id.</p>
+<script async src="http://beacon.local-phave.localhost:3000/bambino.js" data-phv-tenant="acme" data-phv-key="phv_wk_OOqtk86aN_cAqBa_VGaUvQFnkjl4hXLQ" data-phv-consent="opt_out" data-phv-embed="f192cema0d70ni4"></script>
+<div id="f192cema0d70ni4"></div>
+  </section>
+  <section id="case-load" style="margin:1.5rem 0;padding:1rem;border:1px solid #ccd;border-radius:12px">
+    <h2>2. The forms.load snippet</h2>
+    <p>The two lines the panel gives when the tag is installed some other way: the empty element, then a script that asks the tag for the form.</p>
+<div id="f10eyop010cakmb"></div>
+<script>window.__phv=window.__phv||{};(window.__phv.q=window.__phv.q||[]).push(["forms.load",{embed:"f10eyop010cakmb",into:"#f10eyop010cakmb"}]);</script>
+  </section>
+  <section id="case-line" style="margin:1.5rem 0;padding:1rem;border:1px solid #ccd;border-radius:12px">
+    <h2>3. A line pasted before codes named the tag</h2>
+    <p>The old one-line code, with only the tag in the head to find it.</p>
+<div data-phave-form="f12ipv160o33xg4"></div>
+  </section>
+
+</main>
+</body>
+</html>
